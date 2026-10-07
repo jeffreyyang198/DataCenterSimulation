@@ -16,12 +16,11 @@ import math
 def estimate_facility_energy(it_energy_mwh, pue):
 
     if not math.isfinite(it_energy_mwh) or it_energy_mwh < 0:
-
-        raise ValueError("IT energy must be finite and can't be negative")
+        raise ValueError("IT energy can't be negative")
 
     if not math.isfinite(pue) or pue <1:
 
-        raise ValueError("PUE has to be finite and 1 or above")
+        raise ValueError("PUE has to be  1 or above")
 
 
 
@@ -36,13 +35,13 @@ def estimate_power_demand(im3_areasqft, effective_areafactor, power_density_perf
         raise ValueError("Power estimation only supports building footprints")
 
     if not math.isfinite(im3_areasqft) or im3_areasqft<= 0 :
-        raise ValueError("IM3 area has to be a positive finite number")
+        raise ValueError("IM3 area has to be a positive  number")
            
     if not math.isfinite(effective_areafactor) or effective_areafactor<=0:
-        raise ValueError("Effective area factor has to be a positive finite number")
+        raise ValueError("Effective area factor has to be a positive  number")
     
     if not math.isfinite(power_density_perft2) or power_density_perft2<=0:
-        raise ValueError("Power density has to be a positive finite number")
+        raise ValueError("Power density has to be a positive  number")
     
     
     effective_area= (im3_areasqft*effective_areafactor)
@@ -77,7 +76,7 @@ def estimate_annual_energy(power_mw, utilization):
 
     if not math.isfinite(power_mw) or power_mw<0:
 
-         raise ValueError("Power demand must be finite and can't be negative")
+         raise ValueError("Power demand can't be negative")
 
     if not 0<= utilization <=1:
 
@@ -89,7 +88,7 @@ def estimate_annual_energy(power_mw, utilization):
 def estimate_avg_it_power( ratedpower_mw, utilization, idle_fraction):
 
     if not math.isfinite(ratedpower_mw) or ratedpower_mw<0:
-        raise ValueError("Rated power must be finite and can't be negative")
+        raise ValueError("Rated power can't be negative")
 
     if not 0<= utilization<=1:
        raise ValueError("Utilization has to be between 0 and 1")
@@ -108,10 +107,10 @@ def estimate_annual_facility_energy(avg_it_powermw, pue):
     hour_year=8760
 
     if not math.isfinite(avg_it_powermw) or avg_it_powermw <0:
-        raise ValueError("Avg IT power must be finite and can't be negative")
+        raise ValueError("Avg IT power can't be negative")
 
     if not math.isfinite(pue) or pue<1:
-        raise ValueError("PUE must be finite and at least 1")
+        raise ValueError("PUE  must be at least 1")
 
     facility_powermw= (avg_it_powermw*pue)
 

@@ -1,0 +1,32 @@
+{
+  "source_version": "2026.02.09",
+  "input_rows": 1479,
+  "output_sites": 1474,
+  "exact_duplicates_removed": 0,
+  "ambiguous_county_sites": 5,
+  "missing_values": {
+    "site_id": 0,
+    "source": 0,
+    "source_version": 0,
+    "source_site_id": 0,
+    "site_name": 275,
+    "state": 0,
+    "state_abbr": 0,
+    "state_fips": 0,
+    "county": 5,
+    "county_fips": 5,
+    "longitude": 0,
+    "latitude": 0,
+    "square_feet": 105,
+    "operator": 519,
+    "operator_raw": 519,
+    "site_type": 0,
+    "reference": 1101,
+    "quality_flags": 895
+  },
+  "site_types": {
+    "building": 1237,
+    "campus": 132,
+    "point": 105
+  }
+}

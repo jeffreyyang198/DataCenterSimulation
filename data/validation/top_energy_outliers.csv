@@ -1,0 +1,31 @@
+ranking_metric,rank,site_id,site_name,operator,state,county,site_type,square_feet,estimated_rated_it_power_mw,estimated_average_it_power_mw,estimated_annual_facility_energy_mwh
+estimated_rated_it_power_mw,1,im3_01455361421,IONIC Digital Cedarvale,IONIC Digital,Texas,Ward County,building,2238928.0,364.2952095564806,306.0079760274437,3752881.8180005695
+estimated_rated_it_power_mw,2,im3_00300974499,Apple Data Center,Apple,Arizona,Maricopa County,building,1338261.0,217.74798985776465,182.9083114805223,2243187.531997125
+estimated_rated_it_power_mw,3,im3_00567575425,,,Arizona,Maricopa County,building,1263277.0,205.5473688492359,172.65978983335816,2117499.6625163043
+estimated_rated_it_power_mw,4,im3_01386926534,xAI Macrohard Colossus 2,xAI,Tennessee,Shelby County,building,961601.0,156.46177000989815,131.42788680831444,1611831.6038171684
+estimated_rated_it_power_mw,5,im3_01160814416,Meta Huntsville Data center,Meta,Alabama,Madison County,building,857148.0,139.4662580846361,117.15165679109435,1436747.918885981
+estimated_rated_it_power_mw,6,im3_00204316962,IO Datacenter,,New Jersey,Middlesex County,building,829908.0,135.03404699597294,113.42859947661728,1391088.343981234
+estimated_rated_it_power_mw,7,im3_01077131079,xAI Macrohardrr,xAI,Mississippi,DeSoto County,building,812955.0,132.27563016094695,111.11152933519548,1362671.7957668372
+estimated_rated_it_power_mw,8,im3_01381264361,xAI Colossus,,Tennessee,Shelby County,building,776966.0,126.41987227291833,106.1926927092514,1302347.1833862592
+estimated_rated_it_power_mw,9,im3_01070895993,,Meta,Georgia,Newton County,building,763506.0,124.2298002738946,104.35303223007148,1279785.5872695963
+estimated_rated_it_power_mw,10,im3_00815057182,Facebook Fort Worth Datacenter,Meta,Texas,Tarrant County,building,753193.0,122.5517755691448,102.94349147808164,1262498.979487193
+estimated_annual_facility_energy_mwh,1,im3_01455361421,IONIC Digital Cedarvale,IONIC Digital,Texas,Ward County,building,2238928.0,364.2952095564806,306.0079760274437,3752881.8180005695
+estimated_annual_facility_energy_mwh,2,im3_00300974499,Apple Data Center,Apple,Arizona,Maricopa County,building,1338261.0,217.74798985776465,182.9083114805223,2243187.531997125
+estimated_annual_facility_energy_mwh,3,im3_00567575425,,,Arizona,Maricopa County,building,1263277.0,205.5473688492359,172.65978983335816,2117499.6625163043
+estimated_annual_facility_energy_mwh,4,im3_01386926534,xAI Macrohard Colossus 2,xAI,Tennessee,Shelby County,building,961601.0,156.46177000989815,131.42788680831444,1611831.6038171684
+estimated_annual_facility_energy_mwh,5,im3_01160814416,Meta Huntsville Data center,Meta,Alabama,Madison County,building,857148.0,139.4662580846361,117.15165679109435,1436747.918885981
+estimated_annual_facility_energy_mwh,6,im3_00204316962,IO Datacenter,,New Jersey,Middlesex County,building,829908.0,135.03404699597294,113.42859947661728,1391088.343981234
+estimated_annual_facility_energy_mwh,7,im3_01077131079,xAI Macrohardrr,xAI,Mississippi,DeSoto County,building,812955.0,132.27563016094695,111.11152933519548,1362671.7957668372
+estimated_annual_facility_energy_mwh,8,im3_01381264361,xAI Colossus,,Tennessee,Shelby County,building,776966.0,126.41987227291833,106.1926927092514,1302347.1833862592
+estimated_annual_facility_energy_mwh,9,im3_01070895993,,Meta,Georgia,Newton County,building,763506.0,124.2298002738946,104.35303223007148,1279785.5872695963
+estimated_annual_facility_energy_mwh,10,im3_00815057182,Facebook Fort Worth Datacenter,Meta,Texas,Tarrant County,building,753193.0,122.5517755691448,102.94349147808164,1262498.979487193
+square_feet,1,im3_01455361421,IONIC Digital Cedarvale,IONIC Digital,Texas,Ward County,building,2238928.0,364.2952095564806,306.0079760274437,3752881.8180005695
+square_feet,2,im3_00300974499,Apple Data Center,Apple,Arizona,Maricopa County,building,1338261.0,217.74798985776465,182.9083114805223,2243187.531997125
+square_feet,3,im3_00567575425,,,Arizona,Maricopa County,building,1263277.0,205.5473688492359,172.65978983335816,2117499.6625163043
+square_feet,4,im3_01386926534,xAI Macrohard Colossus 2,xAI,Tennessee,Shelby County,building,961601.0,156.46177000989815,131.42788680831444,1611831.6038171684
+square_feet,5,im3_01160814416,Meta Huntsville Data center,Meta,Alabama,Madison County,building,857148.0,139.4662580846361,117.15165679109435,1436747.918885981
+square_feet,6,im3_00204316962,IO Datacenter,,New Jersey,Middlesex County,building,829908.0,135.03404699597294,113.42859947661728,1391088.343981234
+square_feet,7,im3_01077131079,xAI Macrohardrr,xAI,Mississippi,DeSoto County,building,812955.0,132.27563016094695,111.11152933519548,1362671.7957668372
+square_feet,8,im3_01381264361,xAI Colossus,,Tennessee,Shelby County,building,776966.0,126.41987227291833,106.1926927092514,1302347.1833862592
+square_feet,9,im3_01070895993,,Meta,Georgia,Newton County,building,763506.0,124.2298002738946,104.35303223007148,1279785.5872695963
+square_feet,10,im3_00815057182,Facebook Fort Worth Datacenter,Meta,Texas,Tarrant County,building,753193.0,122.5517755691448,102.94349147808164,1262498.979487193

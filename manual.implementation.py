@@ -2,16 +2,16 @@ import math
 
 #estimate_power_demand()
 
-# \(P_{MW}\) = estimated data center power demand in megawatts
-# \(A_{ft^2}\) = data center area in square feet from IM3
-# \(D_{W/ft^2}\) = assumed power density, meaning watts required per square foot
-# \(10^6\) = converts watts to megawatts (1,000,000)
+# estimated data center power demand in megawatts
+# data center area in square feet from IM3
+# assumed power density, meaning watts required per square foot
+# convert watts to megawatts (1,000,000)
 # IM3 sqft represents facility/campus polygon surface area.
 # It is NOT assumed to equal usable floor area or IT floor area.
-# Estimate buildings only, using an explicit gross-floor-area assumption.
-# \(A_{IM3}\) = IM3 building polygon area in ft²
-# \(F_A\) = effective-area factor, converting footprint into estimated gross floor area
-# \(D\) = critical IT power density in W/ft² of gross floor area
+# Estimate buildings only, using an explicit assumption.
+# IM3 building polygon area in ft2
+#  converting footprint into estimated gross floor area
+# critical IT power density in W/ft2 of gross floor area
 
 def estimate_facility_energy(it_energy_mwh, pue):
 
@@ -62,12 +62,12 @@ def estimate_power_demand(im3_areasqft, effective_areafactor, power_density_perf
 
 
 #estimate_annual_energy()
-# \(E_{annual}\) = estimated annual electricity use in MWh/year
-# \(P_{MW}\) = estimated power demand in megawatts
-# \(8760\) = number of hours in one year
-# \(U\) = utilization/load factor, from 0 to 1
-# This simple load-factor calculation is separate from the idle-power model.
-# Don't pass average IT power here; its utilization is already included.
+# estimated annual electricity use in MWh/year
+# estimated power demand in megawatts
+#  number of hours in one year is 8600
+# utilization/load factor, from 0 to 1
+# Separate load-factor calculation from the idle-power model.
+
 
 
 def estimate_annual_energy(power_mw, utilization):

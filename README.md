@@ -81,30 +81,6 @@ population + weather + water + power infrastructure
 Compare community burden across locations
 ```
 
-## Energy Model
-
-For supported building records, rated IT power is estimated using:
-
-\[
-P_{rated}
-=
-\frac{
-A_{IM3}
-\times
-F_A
-\times
-D
-}{
-10^6
-}
-\]
-
-where:
-
-- \(A_{IM3}\) = IM3 building footprint area in ft²
-- \(F_A\) = explicit effective-area multiplier
-- \(D\) = calibrated power density in W/ft²
-
 The current power-density calibration is derived from publicly reported U.S. data-center facilities with both gross area and IT capacity information.
 
 Current scenarios are based on the calibration distribution:
@@ -113,31 +89,7 @@ Current scenarios are based on the calibration distribution:
 - Reference: median
 - High: 75th percentile
 
-Average IT power incorporates idle power:
-
-\[
-P_{avg}
-=
-P_{idle}
-+
-U(P_{rated}-P_{idle})
-\]
-
-where \(U\) represents workload utilization.
-
-Annual facility electricity is then estimated as:
-
-\[
-E_{annual}
-=
-P_{avg}
-\times
-PUE
-\times
-8760
-\]
-
-These values are **scenario-based estimates and should not be interpreted as observed facility consumption**.
+Values are **scenario-based estimates and should not be interpreted as observed facility consumption**.
 
 ## Data Sources
 

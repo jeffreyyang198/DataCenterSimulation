@@ -2,8 +2,6 @@ import os
 import pandas as pd
 import sys
 
-# build_water_impact_df() return a new dataframe
-
 def estimate_total_water_use(csv_file_path: str) -> pd.DataFrame:
     """
     Input: File path string of the CSV file containing Table 3

@@ -9,7 +9,7 @@ def estimate_total_water_use(csv_file_path: str) -> pd.DataFrame:
     - each value is for a hypothetical 1 MW data center placed within each US subbasin
     - subbasin is identified by the HUC8 code
 
-    Output: Pandas dataframe containing the subbasin_code, water_footprint, water_impact columns
+    Output: Pandas dataframe containing the subbasin_code, water_footprint, water_scarcity columns
     """
     initial_df = pd.read_csv(csv_file_path)
 

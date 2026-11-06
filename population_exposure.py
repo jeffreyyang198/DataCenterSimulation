@@ -373,6 +373,60 @@ def build_tract_layer(tracts, acs):
 # The two exposure methods
 # --------------------------------------------------------------------------
 
+# Saved copy of the tract layer, so later runs never re-download Census data.
+TRACT_CACHE = "data/processed/tracts_near_sites.gpkg"
+
+# Shapes get simplified by this many metres before saving. It cuts the file
+# down by a lot and moves tract areas by a tiny fraction of a percent.
+SIMPLIFY_TOLERANCE_M = 5.0
+
+
+def trim_tracts_to_sites(tracts, sites, radius_km=max(DEFAULT_RADII_KM)):
+    """Keep only the tracts that touch some site's largest buffer.
+
+    Only these tracts can ever add people to an exposure number, so the rest
+    of the country doesn't need to be saved. Returns a GeoDataFrame in the
+    same layout as build_tract_layer().
+    """
+    circles = sites[["geometry"]].copy()
+    circles["geometry"] = circles.geometry.buffer(radius_km * 1000.0)
+
+    near = gpd.sjoin(tracts[["GEOID", "geometry"]], circles,
+                     how="inner", predicate="intersects")
+    return tracts[tracts["GEOID"].isin(near["GEOID"].unique())].copy()
+
+
+def save_tract_cache(tracts, path):
+    """Simplify the trimmed tracts and save them as a GeoPackage.
+
+    Tract area is recomputed from the simplified shape, so a circle that
+    swallows a whole tract still takes exactly all of its population.
+    """
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    saved = tracts.copy()
+    saved["geometry"] = saved.geometry.simplify(SIMPLIFY_TOLERANCE_M,
+                                                preserve_topology=True)
+    saved["tract_area_m2"] = saved.geometry.area
+    saved.to_file(path, driver="GPKG")
+
+    size_mb = path.stat().st_size / 1e6
+    print(f"Saved {len(saved)} tracts to {path} ({size_mb:.1f} MB)")
+    if size_mb > 50:
+        print("  Warning: over 50 MB, GitHub will warn on push; over 100 MB "
+              "it will refuse the file")
+
+
+def load_tract_cache(path):
+    """Load the saved tract layer instead of downloading from Census."""
+    tracts = gpd.read_file(path)
+    tracts = tracts.to_crs(CONUS_ALBERS)
+    tracts["GEOID"] = tracts["GEOID"].astype(str)
+    print(f"Loaded {len(tracts)} tracts from saved file {path}")
+    return tracts[["GEOID", "population", "tract_area_m2", "geometry"]]
+
+
 def assign_containing_tract(sites, tracts):
     """Exposure as the population of the tract containing each site.
 
@@ -496,6 +550,12 @@ def main():
                         help="where GHCN-Daily files live or will be saved")
     parser.add_argument("--skip-temperature", action="store_true",
                         help="population only; no NOAA download")
+    parser.add_argument("--tract-cache", default=TRACT_CACHE,
+                        help="saved tract layer; loaded instead of "
+                             "downloading when it exists")
+    parser.add_argument("--refresh-tracts", action="store_true",
+                        help="ignore the saved tract layer and rebuild it "
+                             "from Census, e.g. after new sites are added")
     parser.add_argument("--out", default="data/processed/community_exposure.csv")
     args = parser.parse_args()
 
@@ -515,12 +575,28 @@ def main():
     if args.outlines:
         sites = drop_double_listed(sites, args.outlines)
 
-    states = resolve_state_list(sites, args.states)
-    print(f"Covering {len(states)} states: {', '.join(states)}")
+    cache = Path(args.tract_cache)
 
-    tracts = load_tracts(args.tiger_dir, states)
-    acs = load_acs(args.acs, states, args.census_key)
-    tract_layer = build_tract_layer(tracts, acs)
+    if cache.exists() and not args.refresh_tracts:
+        # The saved file already has population joined on, so no TIGER or
+        # ACS download and no API key are needed.
+        tract_layer = load_tract_cache(cache)
+    else:
+        states = resolve_state_list(sites, args.states)
+        print(f"Covering {len(states)} states: {', '.join(states)}")
+
+        tracts = load_tracts(args.tiger_dir, states)
+        acs = load_acs(args.acs, states, args.census_key)
+        tract_layer = build_tract_layer(tracts, acs)
+
+        # Only a full run saves the cache. A run filtered to a few states
+        # would save a partial file and break every later full run.
+        if not args.site_states and not args.states:
+            trimmed = trim_tracts_to_sites(tract_layer, sites)
+            save_tract_cache(trimmed, cache)
+            # Use the saved version for this run too, so the first run and
+            # every later one give identical numbers.
+            tract_layer = load_tract_cache(cache)
 
     print("\nContaining-tract exposure:")
     containing = assign_containing_tract(sites, tract_layer)

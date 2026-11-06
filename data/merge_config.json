@@ -1,0 +1,22 @@
+{
+  "datasets": [
+    {
+      "name": "community",
+      "path": "processed/community_exposure.csv",
+      "key": "site_id",
+      "columns": [
+        "tract_geoid",
+        "tract_population",
+        "pop_1km",
+        "tracts_within_1km",
+        "incomplete_pop_1km",
+        "pop_3km",
+        "tracts_within_3km",
+        "incomplete_pop_3km",
+        "pop_5km",
+        "tracts_within_5km",
+        "incomplete_pop_5km"
+      ]
+    }
+  ]
+}

@@ -42,7 +42,7 @@ import geopandas as gpd
 import pandas as pd
 import requests
 
-from temperature_adjustment import adjust_for_temperature
+from extra_functions.temperature_adjustment import adjust_for_temperature
 
 # Equal-area projection for the continental US. Distances are metres and
 # polygon areas are correct, which is required before any buffering. Doing

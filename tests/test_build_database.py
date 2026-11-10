@@ -3,7 +3,7 @@ import unittest
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
-from build_database import merge_dataset
+from extra_functions.build_database import merge_dataset
 
 
 class DatabaseMergeTests(unittest.TestCase):

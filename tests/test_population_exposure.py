@@ -19,7 +19,7 @@ import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point, Polygon
 
-from extra_functions.population_exposure import (
+from data_processing.population_exposure import (
     CONUS_ALBERS,
     assign_containing_tract,
     calculate_population_exposure,

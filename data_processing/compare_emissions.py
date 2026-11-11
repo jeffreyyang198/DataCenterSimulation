@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-import extra_functions.emissions as EM
+import emissions as EM
 
 # parameters
 FACILITY = dict(mw=100, pue=1.3, load_factor=0.8)

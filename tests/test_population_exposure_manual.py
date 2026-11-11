@@ -15,7 +15,7 @@ Kept separate from test_population_exposure.py so the two suites don't clash.
 import math
 import unittest
 
-import extra_functions.population_exposure_manual as manual
+import data_processing.population_exposure_manual as manual
 
 
 class ManualExposureTests(unittest.TestCase):

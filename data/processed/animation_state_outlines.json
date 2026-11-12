@@ -1,0 +1,208 @@
+{
+  "source_signatures": {
+    "data/raw/census/tiger2023/tl_2023_01_tract/tl_2023_01_tract.shp": [
+      18801108,
+      1699508748000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_04_tract/tl_2023_04_tract.shp": [
+      13524472,
+      1699508435000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_05_tract/tl_2023_05_tract.shp": [
+      16862776,
+      1699508694000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_06_tract/tl_2023_06_tract.shp": [
+      51594156,
+      1699509351000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_08_tract/tl_2023_08_tract.shp": [
+      13621520,
+      1699508536000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_09_tract/tl_2023_09_tract.shp": [
+      4305636,
+      1699508381000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_10_tract/tl_2023_10_tract.shp": [
+      1751796,
+      1699466361000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_11_tract/tl_2023_11_tract.shp": [
+      607412,
+      1699509003000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_12_tract/tl_2023_12_tract.shp": [
+      22484828,
+      1699509681000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_13_tract/tl_2023_13_tract.shp": [
+      25563284,
+      1700256889000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_16_tract/tl_2023_16_tract.shp": [
+      7743296,
+      1699509754000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_17_tract/tl_2023_17_tract.shp": [
+      17007648,
+      1699510294000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_18_tract/tl_2023_18_tract.shp": [
+      10934864,
+      1699510034000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_19_tract/tl_2023_19_tract.shp": [
+      7333304,
+      1699510068000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_20_tract/tl_2023_20_tract.shp": [
+      5459264,
+      1699510562000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_21_tract/tl_2023_21_tract.shp": [
+      21127352,
+      1699510483000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_22_tract/tl_2023_22_tract.shp": [
+      13366864,
+      1700256549000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_23_tract/tl_2023_23_tract.shp": [
+      4995824,
+      1699510671000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_24_tract/tl_2023_24_tract.shp": [
+      9352912,
+      1699510738000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_25_tract/tl_2023_25_tract.shp": [
+      7198416,
+      1699510819000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_26_tract/tl_2023_26_tract.shp": [
+      9319828,
+      1699511186000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_27_tract/tl_2023_27_tract.shp": [
+      12771764,
+      1699510996000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_28_tract/tl_2023_28_tract.shp": [
+      15786692,
+      1699511550000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_29_tract/tl_2023_29_tract.shp": [
+      17371900,
+      1699511823000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_30_tract/tl_2023_30_tract.shp": [
+      11013228,
+      1699511527000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_31_tract/tl_2023_31_tract.shp": [
+      3962556,
+      1699511603000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_32_tract/tl_2023_32_tract.shp": [
+      5118380,
+      1699511476000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_33_tract/tl_2023_33_tract.shp": [
+      2416660,
+      1699511521000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_34_tract/tl_2023_34_tract.shp": [
+      11371440,
+      1699511661000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_35_tract/tl_2023_35_tract.shp": [
+      7934364,
+      1699511999000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_36_tract/tl_2023_36_tract.shp": [
+      14323644,
+      1699512378000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_37_tract/tl_2023_37_tract.shp": [
+      31889320,
+      1699512357000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_38_tract/tl_2023_38_tract.shp": [
+      2993312,
+      1699512178000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_39_tract/tl_2023_39_tract.shp": [
+      15813884,
+      1699512499000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_40_tract/tl_2023_40_tract.shp": [
+      11757772,
+      1699512534000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_41_tract/tl_2023_41_tract.shp": [
+      16809700,
+      1699512531000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_42_tract/tl_2023_42_tract.shp": [
+      20483184,
+      1699512523000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_44_tract/tl_2023_44_tract.shp": [
+      1356948,
+      1699512612000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_45_tract/tl_2023_45_tract.shp": [
+      15610480,
+      1699512867000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_46_tract/tl_2023_46_tract.shp": [
+      5259504,
+      1699513121000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_47_tract/tl_2023_47_tract.shp": [
+      24874132,
+      1699513457000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_48_tract/tl_2023_48_tract.shp": [
+      52408420,
+      1699514333000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_49_tract/tl_2023_49_tract.shp": [
+      8969704,
+      1699513372000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_50_tract/tl_2023_50_tract.shp": [
+      1276396,
+      1699513338000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_51_tract/tl_2023_51_tract.shp": [
+      26523644,
+      1699513674000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_53_tract/tl_2023_53_tract.shp": [
+      15732068,
+      1699513554000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_54_tract/tl_2023_54_tract.shp": [
+      12734940,
+      1699513541000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_55_tract/tl_2023_55_tract.shp": [
+      12686428,
+      1699514078000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_56_tract/tl_2023_56_tract.shp": [
+      4504480,
+      1699514004000000000
+    ],
+    "data/raw/census/tiger2023/tl_2023_72_tract/tl_2023_72_tract.shp": [
+      5746540,
+      1699514305000000000
+    ]
+  },
+  "source": "Existing TIGER 2023 tract polygons dissolved by state",
+  "simplification": "1,800 m for national display only; simulation geometry unchanged",
+  "source_copy_manifest": "data/raw/source_copy_manifest.json",
+  "source_copy_manifest_sha256": "94a78208423a7592caa7b130dcde1e3faba5282cd10044aafdbd1cc6ea1eac2f"
+}

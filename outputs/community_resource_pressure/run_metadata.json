@@ -1,0 +1,27 @@
+{
+  "completed_utc": "2026-11-11T21:50:45.938803+00:00",
+  "sites": 1474,
+  "output_rows": 17688,
+  "assignment_counts": {
+    "assigned": 1474
+  },
+  "energy_scenario": "low_ai_inference; floor_area_multiplier=1.0",
+  "population_method": "Uniform population density over total tract polygon area; local AEQD circles; EPSG:6933 intersections",
+  "interpretation": "Screening context only; population buffers overlap. No shared water-supply or health-exposure claim. Siddik scarcity footprint is not multiplied by Aqueduct scores.",
+  "inputs": [
+    "data/raw/source_copy_manifest.json",
+    "data/raw/census/acs2023/source_metadata.json",
+    "data/raw/census/tiger2023/source_metadata.json",
+    "data/raw/aqueduct/source_metadata.json"
+  ],
+  "sites_retained_without_epri_growth": [
+    "im3_00365941471",
+    "im3_00388148510",
+    "im3_00751881301",
+    "im3_01020721870",
+    "im3_01077131079",
+    "im3_01459880367",
+    "im3_06793837329",
+    "im3_10014176940"
+  ]
+}

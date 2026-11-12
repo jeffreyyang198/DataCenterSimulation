@@ -255,3 +255,30 @@ Core scientific equations are also implemented manually and documented to make t
 This project is intended as a scientific screening and simulation framework.
 
 Results should be interpreted as **scenario-based estimates**, not direct measurements of individual data-center resource consumption, local pollution exposure, or utility-system behavior.
+
+## Community and resource pressure analysis
+
+The integrated screening workflow adds validated 2023–2030 energy, emissions,
+modeled direct water demand, Siddik water footprints, ACS/TIGER proximity,
+Aqueduct context, NASA background climate, HUC8 profiles and presentation outputs.
+See [analysis workflows and results](docs/resource_analysis.md),
+[data provenance](docs/data_sources.md), [HUC8 methods](docs/huc8_analysis.md), and
+[the presentation video](outputs/animations/data_center_resource_pressure_2023_2030.mp4).
+Raw data and the oversized site simulation CSV remain local; use the documented
+pipelines to regenerate them. Complete HUC8 tables accompany the dashboard.
+
+## Interactive Dashboard
+
+In the existing project Python environment, run from the repository root:
+
+```bash
+python3 -m src.dashboard.app
+```
+
+Open <http://127.0.0.1:8050>. Click a state, inspect full HUC8 watersheds, then
+select a watershed and site. Year and paired-scenario controls update results.
+State selection filters navigation; complete watersheds are never clipped at
+state borders. See [dashboard methods and validation](docs/dashboard.md).
+Population indicates proximity, not exposure; climate is external context;
+results are scenario-based screening estimates, not measured consumption or harm.
+

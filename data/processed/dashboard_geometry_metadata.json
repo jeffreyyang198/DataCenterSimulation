@@ -1,0 +1,23 @@
+{
+  "state_source": "data/raw/census/state_boundaries_2023/cb_2023_us_state_500k.zip",
+  "state_source_url": "https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_state_500k.zip",
+  "state_source_crs": "EPSG:4269",
+  "display_crs": "EPSG:4326",
+  "state_display_simplification_m": 1200,
+  "huc8_source": "data/raw/siddik/SI_Shapefile.shp",
+  "huc8_name_source": "data/raw/siddik/SI_Shapefile.dbf:SUBBASIN",
+  "huc8_display_parent": "data/processed/huc8_analysis_boundaries.gpkg",
+  "huc8_display_simplification_m": 500,
+  "huc8_additional_simplification": false,
+  "full_watersheds_retained": true,
+  "navigation_relation": "site state assignment \u2192 HUC8",
+  "state_count": 56,
+  "huc8_count": 221,
+  "valid_huc8_geometries": 221,
+  "source_sha256": {
+    "data/raw/census/state_boundaries_2023/cb_2023_us_state_500k.zip": "4a9b4f5cf993cd23738ac49b58fbb556f1f097fcf5e404a9dc10348dd41f7432",
+    "data/processed/huc8_analysis_boundaries.gpkg": "2dd934b34e8b10cfae2b5e18aa5a9637a20ee81622f541a76c49d3422921f09b",
+    "data/processed/master_sites_with_huc8.csv": "e7a0f1159b37af4d580bdb3ef8f35afea75e8c5bffeff39d8176f5bd69b55895",
+    "data/raw/siddik/SI_Shapefile.dbf": "6145ac417525e05af28ef268701a67ad22e5b6d9281c3da2ecd04d53e9682159"
+  }
+}

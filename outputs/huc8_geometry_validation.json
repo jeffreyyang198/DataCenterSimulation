@@ -1,0 +1,9 @@
+{
+  "source": "data/raw/siddik/SI_Shapefile.shp",
+  "source_key": "HUC_8",
+  "profile_groups": 221,
+  "mapped_groups": 221,
+  "unmatched_huc8": [],
+  "display_simplification_m": 500,
+  "model_geometry_changed": false
+}

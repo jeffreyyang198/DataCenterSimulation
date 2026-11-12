@@ -1,0 +1,745 @@
+{
+  "scenario": {
+    "name": "central_2030_screening",
+    "epri": "moderate",
+    "aqueduct": "business_as_usual",
+    "nasa": "SSP2-4.5",
+    "n_models": 1,
+    "population": "ACS 2019\u20132023 static"
+  },
+  "years": [
+    2023,
+    2024,
+    2025,
+    2026,
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "source_files": {
+    "states": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/stateful_community_resource_simulation_2023_2030.csv",
+      "sha256": "3ebee63bb4fac6686c8640d68863d4158d5a303aa0164b921ad5f398b21dfdad",
+      "columns": [
+        "site_id",
+        "state_abbr",
+        "longitude",
+        "latitude",
+        "huc8",
+        "pop_5km",
+        "incomplete_pop_5km",
+        "pfaf_id",
+        "epri_scenario",
+        "year",
+        "projected_energy_mwh",
+        "annual_co2_metric_tonnes",
+        "annual_direct_water_m3",
+        "annual_water_footprint_m3",
+        "annual_water_scarcity_footprint_m3_eq",
+        "temperature_mean_c",
+        "warmest_day_mean_c",
+        "n_models",
+        "nasa_scenario",
+        "aqueduct_scenario",
+        "aqueduct_water_stress",
+        "cumulative_co2_metric_tonnes",
+        "cumulative_direct_water_m3"
+      ]
+    },
+    "summary": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/stateful_community_resource_summary_2023_2030.csv",
+      "sha256": "867668b1d7212a38766cc62f8fe4dd91384048eff80c09ed899f3b33a9f56ddb",
+      "columns": [
+        "year",
+        "epri_scenario",
+        "aqueduct_scenario",
+        "total_projected_energy_mwh",
+        "annual_co2_metric_tonnes",
+        "cumulative_co2_metric_tonnes",
+        "annual_co2e_metric_tonnes",
+        "cumulative_co2e_metric_tonnes",
+        "annual_nox_metric_tonnes",
+        "cumulative_nox_metric_tonnes",
+        "annual_so2_metric_tonnes",
+        "cumulative_so2_metric_tonnes",
+        "annual_direct_water_m3",
+        "cumulative_direct_water_m3",
+        "annual_water_footprint_m3",
+        "annual_water_scarcity_footprint_m3_eq",
+        "median_aqueduct_water_stress",
+        "median_aqueduct_water_depletion",
+        "median_temperature_mean_c",
+        "median_warmest_day_mean_c",
+        "site_count",
+        "modeled_sites",
+        "water_modeled_sites",
+        "co2_modeled_sites",
+        "unique_population_within_5km",
+        "population_incomplete_site_buffers_5km",
+        "presentation_scenario"
+      ]
+    },
+    "huc": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/stateful_huc8_resource_simulation_2023_2030.csv",
+      "sha256": "b8da7b2f8b11c4d94aefffbe73ff83d282b2fdc400330b9210bebb3908f51638",
+      "columns": [
+        "huc8",
+        "year",
+        "epri_scenario",
+        "aqueduct_scenario",
+        "projected_energy_mwh",
+        "annual_co2_metric_tonnes",
+        "cumulative_co2_metric_tonnes",
+        "annual_co2e_metric_tonnes",
+        "cumulative_co2e_metric_tonnes",
+        "annual_nox_metric_tonnes",
+        "cumulative_nox_metric_tonnes",
+        "annual_so2_metric_tonnes",
+        "cumulative_so2_metric_tonnes",
+        "annual_direct_water_m3",
+        "cumulative_direct_water_m3",
+        "annual_water_footprint_m3",
+        "annual_water_scarcity_footprint_m3_eq",
+        "median_aqueduct_water_stress",
+        "median_aqueduct_water_depletion",
+        "median_temperature_mean_c",
+        "median_warmest_day_mean_c",
+        "site_count",
+        "modeled_sites",
+        "water_modeled_sites",
+        "co2_modeled_sites",
+        "max_aqueduct_water_stress",
+        "unique_population_within_5km",
+        "population_scope"
+      ]
+    },
+    "aqueduct": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/stateful_aqueduct_resource_simulation_2023_2030.csv",
+      "sha256": "9dc6848405c4829f32ee6a3799d209823b0af6cb2bac7b4e4a0afd79fb219d23",
+      "columns": [
+        "pfaf_id",
+        "year",
+        "epri_scenario",
+        "aqueduct_scenario",
+        "projected_energy_mwh",
+        "annual_co2_metric_tonnes",
+        "cumulative_co2_metric_tonnes",
+        "annual_co2e_metric_tonnes",
+        "cumulative_co2e_metric_tonnes",
+        "annual_nox_metric_tonnes",
+        "cumulative_nox_metric_tonnes",
+        "annual_so2_metric_tonnes",
+        "cumulative_so2_metric_tonnes",
+        "annual_direct_water_m3",
+        "cumulative_direct_water_m3",
+        "annual_water_footprint_m3",
+        "annual_water_scarcity_footprint_m3_eq",
+        "median_aqueduct_water_stress",
+        "median_aqueduct_water_depletion",
+        "median_temperature_mean_c",
+        "median_warmest_day_mean_c",
+        "site_count",
+        "modeled_sites",
+        "water_modeled_sites",
+        "co2_modeled_sites",
+        "aqueduct_available_blue_water",
+        "aqueduct_background_water_demand",
+        "aqueduct_water_stress",
+        "aqueduct_water_depletion",
+        "aqueduct_supply_demand_unit",
+        "unique_population_within_5km",
+        "population_scope"
+      ]
+    },
+    "frames": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/simulation_animation_frames_2023_2030.csv",
+      "sha256": "c9d2f5249e7ce3ddb4b8004c09a85ecac3d79bdd21dbda0dbdd386559296d6f2",
+      "columns": [
+        "year",
+        "epri_scenario",
+        "aqueduct_scenario",
+        "projected_energy_mwh",
+        "annual_co2_metric_tonnes",
+        "cumulative_co2_metric_tonnes",
+        "annual_co2e_metric_tonnes",
+        "cumulative_co2e_metric_tonnes",
+        "annual_nox_metric_tonnes",
+        "cumulative_nox_metric_tonnes",
+        "annual_so2_metric_tonnes",
+        "cumulative_so2_metric_tonnes",
+        "annual_direct_water_m3",
+        "cumulative_direct_water_m3",
+        "annual_water_footprint_m3",
+        "annual_water_scarcity_footprint_m3_eq",
+        "median_aqueduct_water_stress",
+        "median_aqueduct_water_depletion",
+        "median_temperature_mean_c",
+        "median_warmest_day_mean_c",
+        "site_count",
+        "modeled_sites",
+        "water_modeled_sites",
+        "co2_modeled_sites",
+        "unique_population_within_5km",
+        "population_incomplete_site_buffers_5km",
+        "presentation_scenario"
+      ]
+    },
+    "master": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/data/processed/master_sites.csv",
+      "sha256": "57617212817f4993c03b98fcd00d133310e0d66c985d74e3ed96d7ad2b734a53",
+      "columns": [
+        "site_id",
+        "source",
+        "source_version",
+        "source_site_id",
+        "site_name",
+        "state",
+        "state_abbr",
+        "state_fips",
+        "county",
+        "county_fips",
+        "longitude",
+        "latitude",
+        "square_feet",
+        "operator",
+        "operator_raw",
+        "site_type",
+        "reference",
+        "quality_flags"
+      ]
+    },
+    "huc_mapping": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/data/processed/master_sites_with_huc8.csv",
+      "sha256": "e7a0f1159b37af4d580bdb3ef8f35afea75e8c5bffeff39d8176f5bd69b55895",
+      "columns": [
+        "site_id",
+        "source",
+        "source_version",
+        "source_site_id",
+        "site_name",
+        "state",
+        "state_abbr",
+        "state_fips",
+        "county",
+        "county_fips",
+        "longitude",
+        "latitude",
+        "square_feet",
+        "operator",
+        "operator_raw",
+        "site_type",
+        "reference",
+        "quality_flags",
+        "huc8",
+        "huc8_status",
+        "huc8_candidates",
+        "WF_1MW_DC",
+        "WSF_1MW_DC",
+        "CF_1MW_DC",
+        "table3_match"
+      ]
+    },
+    "aqueduct_mapping": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/data/processed/site_aqueduct_basins.csv",
+      "sha256": "d6582353edb71c9b70e5d5aa71a6537a3c77162122ca5d2c01ca7720b3e843d4",
+      "columns": [
+        "site_id",
+        "pfaf_id",
+        "aqueduct_assignment_status",
+        "pfaf_id_candidates"
+      ]
+    },
+    "population": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/data/processed/community_exposure_acs2023.csv",
+      "sha256": "de323598201c2b2f85dcf1b815a4c5ec93d664ab0a4dc3eb9458648235256e59",
+      "columns": [
+        "site_id",
+        "longitude",
+        "latitude",
+        "pop_1km",
+        "tracts_within_1km",
+        "coverage_fraction_1km",
+        "incomplete_pop_1km",
+        "pop_3km",
+        "tracts_within_3km",
+        "coverage_fraction_3km",
+        "incomplete_pop_3km",
+        "pop_5km",
+        "tracts_within_5km",
+        "coverage_fraction_5km",
+        "incomplete_pop_5km"
+      ]
+    },
+    "nasa": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/data/raw/nasa/processed_data_2023_2030-1.csv",
+      "sha256": "9e4a82ec6039a647535fe3e614d1414eae63cd9b5f5e8ad34f65b570c1cba1c6",
+      "columns": [
+        "site_id",
+        "site_name",
+        "state_abbr",
+        "county",
+        "operator",
+        "site_type",
+        "year",
+        "scenario",
+        "temperature_mean_c",
+        "temperature_anomaly_vs_2023_2030_c",
+        "warmest_day_mean_c",
+        "coldest_day_mean_c",
+        "n_models"
+      ]
+    },
+    "unique_population": {
+      "path": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/data/processed/stateful_unique_population_5km.csv",
+      "sha256": "f1269c489cc5ac3b9a1419c9e352d3677c03b72ff34f4bc970c0d88ce43789c1",
+      "columns": [
+        "group_type",
+        "group_id",
+        "unique_population_within_5km",
+        "missing_tract_population"
+      ]
+    }
+  },
+  "metrics_displayed": {
+    "projected_energy_mwh": {
+      "label": "Electricity demand",
+      "scale": 1000000.0,
+      "unit": "TWh/year"
+    },
+    "annual_co2_metric_tonnes": {
+      "label": "Annual CO\u2082",
+      "scale": 1000000.0,
+      "unit": "million metric tonnes/year"
+    },
+    "cumulative_co2_metric_tonnes": {
+      "label": "Cumulative CO\u2082",
+      "scale": 1000000.0,
+      "unit": "million metric tonnes"
+    },
+    "annual_direct_water_m3": {
+      "label": "Direct water \u00b7 annual",
+      "scale": 1000000.0,
+      "unit": "million m\u00b3/year"
+    },
+    "cumulative_direct_water_m3": {
+      "label": "Direct water \u00b7 cumulative",
+      "scale": 1000000000.0,
+      "unit": "billion m\u00b3 \u00b7 accounting"
+    },
+    "annual_water_footprint_m3": {
+      "label": "Water footprint",
+      "scale": 1000000000.0,
+      "unit": "billion m\u00b3/year"
+    },
+    "annual_water_scarcity_footprint_m3_eq": {
+      "label": "Scarcity-weighted WF",
+      "scale": 1000000000.0,
+      "unit": "billion m\u00b3-eq/year"
+    },
+    "unique_population_within_5km": {
+      "label": "Population within 5 km\nof mapped sites",
+      "scale": 1000000.0,
+      "unit": "million \u00b7 static ACS context"
+    }
+  },
+  "environmental_context": [
+    "median_aqueduct_water_stress",
+    "median_temperature_mean_c"
+  ],
+  "frame_count": 864,
+  "fps": 24,
+  "duration_seconds": 36,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "generation_date": "2026-11-11T23:19:33.086483+00:00",
+  "video": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/data_center_resource_pressure_2023_2030.mp4",
+  "video_verification": {
+    "encoder": "Installed macOS AVFoundation / H.264 Main; FFmpeg unavailable",
+    "codec": "avc1",
+    "decoded_frames": 864,
+    "duration_seconds": 36,
+    "fps": 24,
+    "height": 1080,
+    "status": "passed",
+    "width": 1920
+  },
+  "gif": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/data_center_resource_pressure_2023_2030.gif",
+  "gif_metadata": {
+    "fps": 10,
+    "resolution": [
+      960,
+      540
+    ],
+    "frame_count": 360,
+    "duration_seconds": 36.0
+  },
+  "stages": [
+    {
+      "name": "2023 baseline",
+      "start": 0,
+      "end": 4
+    },
+    {
+      "name": "annual progression",
+      "start": 4,
+      "end": 20,
+      "seconds_per_year": 2
+    },
+    {
+      "name": "HUC8 hotspots and contrast",
+      "start": 20,
+      "end": 30,
+      "overview_seconds": 5,
+      "contrast_seconds": 5
+    },
+    {
+      "name": "2030 summary",
+      "start": 30,
+      "end": 36
+    }
+  ],
+  "hotspot_selection": {
+    "group": "HUC8",
+    "eligible_groups": 177,
+    "wf_q75_m3_year": 8122879.416986095,
+    "population_q75": 209547.73108933313,
+    "median_stress_minimum": 0.4,
+    "risk_coverage_minimum": 0.8,
+    "exclude_incomplete_population": true,
+    "selection": "WF \u2265 q75 AND unique nearby population \u2265 q75 AND median raw stress \u2265 0.4",
+    "ranking": "Annual WF descending, then unique population descending; HUC8 breaks ties. No composite score.",
+    "population": "Dissolved 5-km buffers within HUC8; nonadditive between HUC8 groups",
+    "risk": "Median, maximum and proportion of known site contexts \u22650.4 retained; no arbitrary PFAF assignment"
+  },
+  "contrast_selection": {
+    "method": "Highest WSF within the bottom population quartile versus highest WSF within the top population quartile",
+    "population_q25": 24189.678644038402,
+    "population_q75": 210527.77587268135,
+    "hard_coded_huc8_ids": false
+  },
+  "hotspots_displayed": [
+    "15050100",
+    "15070102",
+    "02070010",
+    "15060106",
+    "07120004"
+  ],
+  "contrast_huc8_ids": [
+    "17020015",
+    "15010015"
+  ],
+  "basemap": {
+    "source_signatures": {
+      "data/raw/census/tiger2023/tl_2023_01_tract/tl_2023_01_tract.shp": [
+        18801108,
+        1699508748000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_04_tract/tl_2023_04_tract.shp": [
+        13524472,
+        1699508435000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_05_tract/tl_2023_05_tract.shp": [
+        16862776,
+        1699508694000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_06_tract/tl_2023_06_tract.shp": [
+        51594156,
+        1699509351000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_08_tract/tl_2023_08_tract.shp": [
+        13621520,
+        1699508536000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_09_tract/tl_2023_09_tract.shp": [
+        4305636,
+        1699508381000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_10_tract/tl_2023_10_tract.shp": [
+        1751796,
+        1699466361000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_11_tract/tl_2023_11_tract.shp": [
+        607412,
+        1699509003000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_12_tract/tl_2023_12_tract.shp": [
+        22484828,
+        1699509681000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_13_tract/tl_2023_13_tract.shp": [
+        25563284,
+        1700256889000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_16_tract/tl_2023_16_tract.shp": [
+        7743296,
+        1699509754000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_17_tract/tl_2023_17_tract.shp": [
+        17007648,
+        1699510294000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_18_tract/tl_2023_18_tract.shp": [
+        10934864,
+        1699510034000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_19_tract/tl_2023_19_tract.shp": [
+        7333304,
+        1699510068000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_20_tract/tl_2023_20_tract.shp": [
+        5459264,
+        1699510562000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_21_tract/tl_2023_21_tract.shp": [
+        21127352,
+        1699510483000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_22_tract/tl_2023_22_tract.shp": [
+        13366864,
+        1700256549000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_23_tract/tl_2023_23_tract.shp": [
+        4995824,
+        1699510671000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_24_tract/tl_2023_24_tract.shp": [
+        9352912,
+        1699510738000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_25_tract/tl_2023_25_tract.shp": [
+        7198416,
+        1699510819000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_26_tract/tl_2023_26_tract.shp": [
+        9319828,
+        1699511186000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_27_tract/tl_2023_27_tract.shp": [
+        12771764,
+        1699510996000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_28_tract/tl_2023_28_tract.shp": [
+        15786692,
+        1699511550000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_29_tract/tl_2023_29_tract.shp": [
+        17371900,
+        1699511823000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_30_tract/tl_2023_30_tract.shp": [
+        11013228,
+        1699511527000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_31_tract/tl_2023_31_tract.shp": [
+        3962556,
+        1699511603000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_32_tract/tl_2023_32_tract.shp": [
+        5118380,
+        1699511476000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_33_tract/tl_2023_33_tract.shp": [
+        2416660,
+        1699511521000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_34_tract/tl_2023_34_tract.shp": [
+        11371440,
+        1699511661000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_35_tract/tl_2023_35_tract.shp": [
+        7934364,
+        1699511999000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_36_tract/tl_2023_36_tract.shp": [
+        14323644,
+        1699512378000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_37_tract/tl_2023_37_tract.shp": [
+        31889320,
+        1699512357000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_38_tract/tl_2023_38_tract.shp": [
+        2993312,
+        1699512178000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_39_tract/tl_2023_39_tract.shp": [
+        15813884,
+        1699512499000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_40_tract/tl_2023_40_tract.shp": [
+        11757772,
+        1699512534000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_41_tract/tl_2023_41_tract.shp": [
+        16809700,
+        1699512531000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_42_tract/tl_2023_42_tract.shp": [
+        20483184,
+        1699512523000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_44_tract/tl_2023_44_tract.shp": [
+        1356948,
+        1699512612000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_45_tract/tl_2023_45_tract.shp": [
+        15610480,
+        1699512867000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_46_tract/tl_2023_46_tract.shp": [
+        5259504,
+        1699513121000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_47_tract/tl_2023_47_tract.shp": [
+        24874132,
+        1699513457000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_48_tract/tl_2023_48_tract.shp": [
+        52408420,
+        1699514333000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_49_tract/tl_2023_49_tract.shp": [
+        8969704,
+        1699513372000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_50_tract/tl_2023_50_tract.shp": [
+        1276396,
+        1699513338000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_51_tract/tl_2023_51_tract.shp": [
+        26523644,
+        1699513674000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_53_tract/tl_2023_53_tract.shp": [
+        15732068,
+        1699513554000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_54_tract/tl_2023_54_tract.shp": [
+        12734940,
+        1699513541000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_55_tract/tl_2023_55_tract.shp": [
+        12686428,
+        1699514078000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_56_tract/tl_2023_56_tract.shp": [
+        4504480,
+        1699514004000000000
+      ],
+      "data/raw/census/tiger2023/tl_2023_72_tract/tl_2023_72_tract.shp": [
+        5746540,
+        1699514305000000000
+      ]
+    },
+    "source": "Existing TIGER 2023 tract polygons dissolved by state",
+    "simplification": "1,800 m for national display only; simulation geometry unchanged",
+    "source_copy_manifest": "data/raw/source_copy_manifest.json",
+    "source_copy_manifest_sha256": "94a78208423a7592caa7b130dcde1e3faba5282cd10044aafdbd1cc6ea1eac2f"
+  },
+  "map_encoding": {
+    "marker_size": "7 + 17*log1p(direct_water_m3/10000), points squared",
+    "color": "Raw stress categories at 0.1,0.2,0.4,0.8",
+    "transparency": 0.55,
+    "hotspot_callout": "Highest-WF real site coordinate within each highlighted HUC8"
+  },
+  "preview_frames": {
+    "opening": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/frame_2023.png",
+    "2026": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/frame_2026.png",
+    "2030": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/frame_2030.png",
+    "hotspots": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/frame_hotspots.png",
+    "contrast": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/frame_contrast.png",
+    "final": "/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/powerpoint_poster_frame.png"
+  },
+  "baseline_metrics": {
+    "year": 2023,
+    "epri_scenario": "moderate",
+    "aqueduct_scenario": "business_as_usual",
+    "projected_energy_mwh": 190883583.17373055,
+    "annual_co2_metric_tonnes": 60331138.8391644,
+    "cumulative_co2_metric_tonnes": 60331138.8391644,
+    "annual_co2e_metric_tonnes": 60634621.387240246,
+    "cumulative_co2e_metric_tonnes": 60634621.387240246,
+    "annual_nox_metric_tonnes": 35610.92265593147,
+    "cumulative_nox_metric_tonnes": 35610.92265593147,
+    "annual_so2_metric_tonnes": 25453.819721496544,
+    "cumulative_so2_metric_tonnes": 25453.819721496544,
+    "annual_direct_water_m3": 343590449.7127151,
+    "cumulative_direct_water_m3": 343590449.7127151,
+    "annual_water_footprint_m3": 1648246426.9050484,
+    "annual_water_scarcity_footprint_m3_eq": 3088751225.447943,
+    "median_aqueduct_water_stress": 0.2030962023699618,
+    "median_aqueduct_water_depletion": 0.0572168093511789,
+    "median_temperature_mean_c": 15.46,
+    "median_warmest_day_mean_c": 31.9555,
+    "site_count": 1474,
+    "modeled_sites": 1233,
+    "water_modeled_sites": 1225,
+    "co2_modeled_sites": 1210,
+    "unique_population_within_5km": 35824747.10972141,
+    "population_incomplete_site_buffers_5km": 3,
+    "presentation_scenario": "central_2030_screening"
+  },
+  "final_metrics": {
+    "year": 2030,
+    "epri_scenario": "moderate",
+    "aqueduct_scenario": "business_as_usual",
+    "projected_energy_mwh": 268592349.2811242,
+    "annual_co2_metric_tonnes": 84891963.43524377,
+    "cumulative_co2_metric_tonnes": 576108585.9785644,
+    "annual_co2e_metric_tonnes": 85318993.81195164,
+    "cumulative_co2e_metric_tonnes": 579006573.7083514,
+    "annual_nox_metric_tonnes": 50108.14020616391,
+    "cumulative_nox_metric_tonnes": 340052.56262926856,
+    "annual_so2_metric_tonnes": 35816.0789874962,
+    "cumulative_so2_metric_tonnes": 243061.29036070037,
+    "annual_direct_water_m3": 483466228.7060236,
+    "cumulative_direct_water_m3": 3280982473.5198226,
+    "annual_water_footprint_m3": 2319248000.2776914,
+    "annual_water_scarcity_footprint_m3_eq": 4346182755.065977,
+    "median_aqueduct_water_stress": 0.272922314,
+    "median_aqueduct_water_depletion": 0.059024807,
+    "median_temperature_mean_c": 15.925,
+    "median_warmest_day_mean_c": 31.288,
+    "site_count": 1474,
+    "modeled_sites": 1233,
+    "water_modeled_sites": 1225,
+    "co2_modeled_sites": 1210,
+    "unique_population_within_5km": 35824747.10972141,
+    "population_incomplete_site_buffers_5km": 3,
+    "presentation_scenario": "central_2030_screening"
+  },
+  "important_caveats": [
+    "Scenario-based screening estimates; not measured or independently deduplicated national totals.",
+    "Population held constant using ACS 2019\u20132023; national and HUC8 values use dissolved buffers; HUC8 populations are not additive.",
+    "NASA SSP2-4.5 background projected climate conditions are external; n_models=1; no data-center-caused local warming is inferred.",
+    "Aqueduct intermediate years are interpolated for visualization and are not official annual WRI forecasts; no data-center-caused stress is inferred.",
+    "Cumulative modeled direct water demand is accounting, not permanent watershed depletion.",
+    "Direct demand uses Siddik supplementary workflow 1.8 m3/MWh; WF and WSF remain separate; WSF is not multiplied by Aqueduct stress.",
+    "HUC8 and PFAF are distinct; HUC8 risk is summarized across site contexts, not one arbitrarily assigned basin.",
+    "Dashboard values step to actual annual outputs. Only playback progress moves between snapshots.",
+    "Missing estimates are not zero; hollow gray markers identify unavailable modeled demand.",
+    "Study inventory has CONUS and Puerto Rico sites; Puerto Rico inset has a separate scale."
+  ],
+  "data_validation": "passed",
+  "test_log": "animation_tests.txt",
+  "implementation_sha256": {
+    "src/visualization/animate_resource_pressure.py": "aab6b615f7a5842df7bc281c731840a174c1eec2429a6ce82a9015ae1bd5cac0",
+    "src/visualization/native_h264.swift": "169af50c247514979786a17ae8537bf4109f16e17c0b1a0d54cef6d07a5d81da"
+  },
+  "tests": {
+    "passed": 106,
+    "failed": 0,
+    "subtests_passed": 38,
+    "log": "animation_tests.txt",
+    "sha256": "8f5a00d589a98646b766dcca6540600aeeba6588cb38dda111a2cd252b9f675d"
+  },
+  "visual_review": "Static annual, hotspot, contrast and final poster previews checked; decoded first/last MP4 frames checked for orientation, legibility and clipping.",
+  "output_sha256": {
+    "outputs/animations/data_center_resource_pressure_2023_2030.mp4": "10afe60bfa905becee5ec850a199c736011d8a45cc90e185275e290554da77cf",
+    "outputs/animations/data_center_resource_pressure_2023_2030.gif": "012ea7bc92aa2f9057a4b1a3201a86e7c4a47a317a572c4a75d50e838547222a",
+    "outputs/animations/powerpoint_poster_frame.png": "3e538fe4456924e0f6267b84716457786cdb931f20425c906a25a0c05ccacbb4"
+  }
+}

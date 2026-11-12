@@ -1,0 +1,14 @@
+{
+  "reviewed_utc": "2026-11-11T22:45:39.430533+00:00",
+  "method": "All four final PDFs rendered with native Quartz (sips) and visually checked for legibility and clipping; corresponding PNGs exported.",
+  "sha256": {
+    "outputs/figures/figure9a_stateful_energy_2023_2030.pdf": "e131778c94ad55750be4a30a0e1f5f2e07b0bc1290477149bab51a8cc20e28e5",
+    "outputs/figures/figure9a_stateful_energy_2023_2030.png": "89c31eb188490790487b303e304f5d53b410c9f9f5a34cd68ce550922c898b54",
+    "outputs/figures/figure9b_cumulative_co2_2023_2030.pdf": "8adb8ec5c6f2d237813f2678cdeb54d73b8528cea7db2601a99aaf3224995051",
+    "outputs/figures/figure9b_cumulative_co2_2023_2030.png": "fbfe20eba32ebfcc3ceeeabe3aaca9629e72599bf80b96821bb1cb74ee446be5",
+    "outputs/figures/figure9c_direct_water_2023_2030.pdf": "096733526e96ab455d104de8701ee74e505254775c31ffd5c9670548a39fc449",
+    "outputs/figures/figure9c_direct_water_2023_2030.png": "1a951a7788f35fec9fa55383018c0d19a8907617cd950d4aea9bf6317e687921",
+    "outputs/figures/figure9d_resource_climate_trajectory.pdf": "ccf2f1b39dcc966159ebd93a20a2f2d324d5788169302ccc42fb2d670cef31a4",
+    "outputs/figures/figure9d_resource_climate_trajectory.png": "52117185bbec5d057854323ad039628b572917e414b31f13fdc5b30e3ecd8553"
+  }
+}

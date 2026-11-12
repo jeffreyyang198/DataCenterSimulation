@@ -1,0 +1,69 @@
+INTERACTIVE DASHBOARD COMPLETE
+
+Launch:
+python3 -m src.dashboard.app
+Local URL: http://127.0.0.1:8050
+
+National states:
+56
+
+States with modeled sites:
+47
+
+HUC8 watersheds:
+221
+
+Site records:
+1474
+
+Years:
+2023–2030
+
+Scenarios:
+higher_pressure
+lower_pressure
+central
+
+Available map metrics:
+Community-resource pressure · CRPI
+Water footprint
+Scarcity-weighted water footprint
+Aqueduct water stress
+Electricity demand
+Annual CO₂
+Nearby population · ACS 2023
+Watershed profile cluster
+Hotspot trajectory · 2023–2030
+Scenario robustness · WSF
+
+Cross-state HUC8 behavior:
+full polygon retained
+
+Dashboard files:
+src/dashboard/__init__.py
+src/dashboard/app.py
+src/dashboard/assets/dashboard.css
+src/dashboard/callbacks.py
+src/dashboard/data.py
+src/dashboard/formatting.py
+src/dashboard/maps.py
+src/dashboard/validate.py
+data/processed/us_states_2023.gpkg
+data/processed/us_states_dashboard.geojson
+data/processed/huc8_dashboard_geometry.geojson
+data/processed/state_huc8_dashboard_crosswalk.csv
+data/processed/huc8_dashboard_names.csv
+data/processed/dashboard_site_states.csv
+data/processed/dashboard_site_states.json
+data/processed/dashboard_geometry_metadata.json
+outputs/dashboard/validation.json
+outputs/dashboard/README.md
+docs/dashboard.md
+
+Tests:
+160 passed
+41 subtests passed
+0 failed
+
+Browser screenshots/manual checks remain unverified: Computer Use access to Chrome was not approved.
+No GitHub push. DataCenterSimulation/ unchanged.

@@ -82,6 +82,7 @@ Pygments==2.21.0
 pyogrio==0.13.0
 pyparsing==3.3.2
 pyproj==3.8.0
+pytest==9.1.1
 python-dateutil==2.9.0.post0
 python-json-logger==4.2.0
 PyYAML==6.0.3
@@ -110,3 +111,11 @@ webcolors==25.10.0
 webencodings==0.6.1
 websocket-client==1.9.2
 widgetsnbextension==4.0.16
+scikit-learn==1.9.1
+scipy==1.18.1
+joblib==1.6.0
+threadpoolctl==3.8.0
+narwhals==2.28.0
+cloudpickle==3.1.2
+dash==4.5.0
+plotly==7.1.0

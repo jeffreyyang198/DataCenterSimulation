@@ -1,0 +1,78 @@
+ANIMATED 2023–2030 SIMULATION COMPLETE
+
+Scenario:
+EPRI moderate
+Aqueduct business_as_usual
+NASA SSP2-4.5
+Population ACS 2023
+
+Years:
+2023–2030
+
+Animation:
+/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/data_center_resource_pressure_2023_2030.mp4
+
+GIF:
+/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/data_center_resource_pressure_2023_2030.gif
+
+Resolution:
+1920 × 1080
+
+Duration:
+36 seconds
+
+FPS:
+24
+
+2023 baseline metrics:
+Electricity demand: 190.884 TWh/year
+Annual CO₂: 60.331 million metric tonnes/year
+Cumulative CO₂: 60.331 million metric tonnes
+Direct water · annual: 343.590 million m³/year
+Direct water · cumulative: 0.344 billion m³ · accounting
+Water footprint: 1.648 billion m³/year
+Scarcity-weighted WF: 3.089 billion m³-eq/year
+Population within 5 km of mapped sites: 35.825 million · static ACS context
+Median Aqueduct raw stress: 0.203096
+Median projected background temperature: 15.460 °C
+
+2030 metrics:
+Electricity demand: 268.592 TWh/year
+Annual CO₂: 84.892 million metric tonnes/year
+Cumulative CO₂: 576.109 million metric tonnes
+Direct water · annual: 483.466 million m³/year
+Direct water · cumulative: 3.281 billion m³ · accounting
+Water footprint: 2.319 billion m³/year
+Scarcity-weighted WF: 4.346 billion m³-eq/year
+Population within 5 km of mapped sites: 35.825 million · static ACS context
+Median Aqueduct raw stress: 0.272922
+Median projected background temperature: 15.925 °C
+
+Hotspots displayed:
+15050100, 15070102, 02070010, 15060106, 07120004
+Contrast HUC8 groups: 17020015, 15010015
+
+Static preview frames:
+/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/frame_2023.png
+/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/frame_2026.png
+/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/frame_2030.png
+/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/frame_hotspots.png
+/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/frame_contrast.png
+/Users/yeritmaryrodriguezdelgado/Desktop/data-center-community-impact/outputs/animations/powerpoint_poster_frame.png
+
+Tests:
+106 passed
+
+Important caveats:
+- Scenario-based screening estimates; not measured or independently deduplicated national totals.
+- Population held constant using ACS 2019–2023; national and HUC8 values use dissolved buffers; HUC8 populations are not additive.
+- NASA SSP2-4.5 background projected climate conditions are external; n_models=1; no data-center-caused local warming is inferred.
+- Aqueduct intermediate years are interpolated for visualization and are not official annual WRI forecasts; no data-center-caused stress is inferred.
+- Cumulative modeled direct water demand is accounting, not permanent watershed depletion.
+- Direct demand uses Siddik supplementary workflow 1.8 m3/MWh; WF and WSF remain separate; WSF is not multiplied by Aqueduct stress.
+- HUC8 and PFAF are distinct; HUC8 risk is summarized across site contexts, not one arbitrarily assigned basin.
+- Dashboard values step to actual annual outputs. Only playback progress moves between snapshots.
+- Missing estimates are not zero; hollow gray markers identify unavailable modeled demand.
+- Study inventory has CONUS and Puerto Rico sites; Puerto Rico inset has a separate scale.
+
+No software installed. No GitHub push. DataCenterSimulation/ unchanged.

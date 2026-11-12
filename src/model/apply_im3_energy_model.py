@@ -6,6 +6,11 @@ from pathlib import Path
 import pandas as pd
 
 if __package__:
+    from .scenarios import SimulationScenario
+else:
+    from scenarios import SimulationScenario
+
+if __package__:
     from .energy_model import estimate_average_it_power, estimate_annual_facility_energy
     from .power_density import (assign_power_density_scenario, estimate_rated_power_from_im3,
                                 load_power_density_calibration, summarize_power_density)
@@ -106,7 +111,29 @@ def apply_energy_model(
     result['energy_estimate_status'] = pd.Series(statuses, index=sites.index, dtype='string')
     return result
 
+def apply_simulation_scenario(
+    sites: pd.DataFrame,
+    summary: dict[str, float | int],
+    scenario: SimulationScenario,
+) -> pd.DataFrame:
+    """Run the existing energy model using a SimulationScenario object.
 
+    This wrapper adds an object-oriented interface without replacing the
+    existing pure scientific calculation functions.
+    """
+    if not isinstance(scenario, SimulationScenario):
+        raise TypeError(
+            "scenario must be a SimulationScenario"
+        )
+
+    return apply_energy_model(
+        sites=sites,
+        summary=summary,
+        floor_area_multiplier=scenario.floor_area_multiplier,
+        workload_parameters=scenario.workload_parameters,
+        power_density_scenario=scenario.power_density_scenario,
+        workload_scenario=scenario.workload,
+    )
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--power-density-scenario', choices=['low', 'reference', 'high'], default='reference')

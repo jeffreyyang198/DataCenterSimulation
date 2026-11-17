@@ -42,7 +42,13 @@ import geopandas as gpd
 import pandas as pd
 import requests
 
-from extra_functions.temperature_adjustment import adjust_for_temperature
+# Imported as part of the extra_functions package (python -m, or the tests)
+# the dot form is needed; run as a plain script, the folder is already on
+# the import path and the bare name works.
+if __package__:
+    from .temperature_adjustment import adjust_for_temperature
+else:
+    from temperature_adjustment import adjust_for_temperature
 
 # Equal-area projection for the continental US. Distances are metres and
 # polygon areas are correct, which is required before any buffering. Doing
@@ -525,6 +531,12 @@ def calculate_population_exposure(sites, tracts, radii_km=DEFAULT_RADII_KM):
 # --------------------------------------------------------------------------
 
 def main():
+    """Run the whole module from the command line.
+
+    Loads the sites, builds or loads the tract layer, computes the
+    containing-tract baseline and the 1/3/5 km exposure, optionally adds the
+    NOAA temperature columns, and writes one row per site to --out.
+    """
     parser = argparse.ArgumentParser(
         description="Population exposure around data center sites."
     )

@@ -147,23 +147,23 @@ https://www.eia.gov/electricity/data/eia860/
 
 ### U.S. Census
 
-American Community Survey and TIGER/Line data will be used to estimate population surrounding data centers.
+Population around each site comes from tract boundaries (TIGER/Line 2024, https://www2.census.gov/geo/tiger/TIGER2024/TRACT/) and tract population (American Community Survey 5-year estimates, table B01003, https://api.census.gov/data/2023/acs/acs5), joined on the 11-digit tract GEOID.
 
-Planned analysis includes population within:
+`extra_functions/population_exposure.py` estimates population within 1, 3, and 5 km of all 1,474 sites by area weighting, plus the population of the single tract containing each site. Output: `data/processed/community_exposure.csv`, merged into the master table through `data/merge_config.json`. The tracts near sites are saved in `data/processed/tracts_near_sites.gpkg`, so reruns need no Census download or API key. The equations are implemented by hand in `extra_functions/population_exposure_manual.py`.
 
-- 1 km
-- 3 km
-- 5 km
+Run from the repository root:
 
-of each facility.
+```
+python -m extra_functions.population_exposure --sites data/processed/master_sites.csv --skip-temperature
+```
 
 ### NOAA Climate Data Online
 
-Planned use includes:
+Daily maximum and minimum temperatures from NOAA GHCN-Daily (https://www.ncei.noaa.gov/pub/data/ghcn/daily) give each site its cooling degree days (base 65°F) from the nearest station with complete 2014-2024 records (`extra_functions/temperature_adjustment.py`). This step is built but has not yet been run on the full site list.
 
-- Daily temperature records
-- Seasonal conditions
-- Temperature-related changes in cooling and electricity demand
+### Published PUE (for the climate sensitivity k)
+
+`data/model_parameters/observed_pue.csv` lists PUE values that operators publish per campus or region, each with its source URL and period: Google per-campus trailing twelve-month PUE (https://www.datacenters.google/efficiency), Microsoft regional fact sheets (2022), and AWS state fact sheets (2025). `extra_functions/pue_climate.py` fits k (how strongly cooling overhead changes with climate) from these and writes a climate-adjusted PUE per site to `data/processed/site_pue_climate.csv`. It needs the NOAA step above to run.
 
 ### Water Data
 
@@ -228,9 +228,8 @@ Spatial proximity alone does **not** establish that a specific power plant suppl
 
 ## Next Steps
 
-- Integrate Census population data
-- Create 1 km, 3 km, and 5 km population-exposure buffers
-- Integrate NOAA temperature data
+- Run the NOAA temperature step and fit the climate sensitivity k from published PUE
+- Feed the climate-adjusted PUE per site into the energy model
 - Clean and integrate EIA-860 plant and generator information
 - Compare modeled data-center demand with regional electricity capacity
 - Add water-use and water-stress metrics

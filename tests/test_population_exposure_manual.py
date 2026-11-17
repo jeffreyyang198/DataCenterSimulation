@@ -122,5 +122,67 @@ class ManualTemperatureTests(unittest.TestCase):
         )
 
 
+class ManualCoverageGuardTests(unittest.TestCase):
+
+    def test_double_counted_piece_is_refused(self):
+        # Your worked example's overlaps fill the 1 km circle exactly; listing
+        # tract 2's piece twice pushes coverage to about 1.35.
+        overlaps = [1800000.0, 1100000.0, 1100000.0, 241592.65]
+        with self.assertRaises(ValueError):
+            manual.coverage_fraction(overlaps, 1000.0)
+
+    def test_exact_tiling_still_reports_one(self):
+        overlaps = [1800000.0, 1100000.0, 241592.65]
+        self.assertAlmostEqual(manual.coverage_fraction(overlaps, 1000.0), 1.0)
+
+
+class ManualClimateSensitivityTests(unittest.TestCase):
+    """Estimating k from facilities that publish their PUE."""
+
+    def test_overhead_differences_by_hand(self):
+        # Overheads 0.08, 0.10, 0.12 average 0.10, so -20%, 0%, +20%.
+        result = manual.overhead_differences([1.08, 1.10, 1.12])
+
+        for got, expected in zip(result, [-0.2, 0.0, 0.2]):
+            self.assertAlmostEqual(got, expected)
+
+    def test_pue_below_one_is_refused(self):
+        # A facility can't use less power than its own servers.
+        with self.assertRaises(ValueError):
+            manual.overhead_differences([1.10, 0.95])
+
+    def test_climate_differences_by_hand(self):
+        # (800 - 1200) / 1200 = -1/3, and (1600 - 1200) / 1200 = +1/3.
+        result = manual.climate_differences([800.0, 1200.0, 1600.0], 1200.0)
+
+        for got, expected in zip(result, [-1 / 3, 0.0, 1 / 3]):
+            self.assertAlmostEqual(got, expected)
+
+    def test_missing_cdd_is_refused(self):
+        # A facility with no weather station must not slip through as zero.
+        with self.assertRaises(ValueError):
+            manual.climate_differences([800.0, float("nan")], 1200.0)
+
+    def test_slope_recovers_known_k(self):
+        """Points built from y = 0.6 x give back k = 0.6.
+
+        x = -1/3, 0, 1/3 and y = -0.2, 0, 0.2:
+        top = 1/15 + 1/15 = 2/15, bottom = 1/9 + 1/9 = 2/9, slope = 0.6
+        """
+        x = manual.climate_differences([800.0, 1200.0, 1600.0], 1200.0)
+        y = manual.overhead_differences([1.08, 1.10, 1.12])
+
+        self.assertAlmostEqual(manual.fit_slope(x, y), 0.6)
+
+    def test_flat_climate_gives_no_slope(self):
+        # Three facilities in identical climates can't tell us anything.
+        with self.assertRaises(ValueError):
+            manual.fit_slope([0.1, 0.1, 0.1], [0.0, 0.2, -0.2])
+
+    def test_two_points_are_refused(self):
+        with self.assertRaises(ValueError):
+            manual.fit_slope([0.0, 1.0], [0.0, 1.0])
+
+
 if __name__ == "__main__":
     unittest.main()

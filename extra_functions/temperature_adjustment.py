@@ -68,7 +68,7 @@ CONUS_ALBERS = "EPSG:5070"
 
 
 # --------------------------------------------------------------------------
-# Pure calculations (no network; covered by unit tests)
+# Pure calculations (no network). Not yet covered by unit tests.
 # --------------------------------------------------------------------------
 
 def tenths_c_to_f(values):

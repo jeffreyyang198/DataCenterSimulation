@@ -21,3 +21,8 @@ DataCenterSimulation/
 outputs/stateful_community_resource_simulation_2023_2030.csv
 outputs/dashboard/geometry_preparation.txt
 outputs/dashboard/programmatic_checks.txt
+
+# Presentation and local comparison artifacts.
+*.log
+*.code-workspace
+/outputs/climate_pue/temporal_emissions_2023_2030.csv

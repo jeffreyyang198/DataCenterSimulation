@@ -135,6 +135,9 @@ class DashboardData:
     population: pd.DataFrame
 
     def __post_init__(self):
+        self.site_identity = self.sites.set_index('site_id', drop=False)
+        self.state_names = self.states.set_index('state_abbr').state_name.to_dict()
+        self.huc_names = self.geometry.set_index('huc8').subbasin_name.to_dict()
         self.annual_lookup = {(int(y), s): g.set_index('site_id', drop=False) for (y, s), g in self.annual.groupby(['year', 'screening_scenario'])}
         self.huc_lookup = {(int(y), s): g.set_index('huc8', drop=False) for (y, s), g in self.profiles.groupby(['year', 'screening_scenario'])}
         self.state_hucs = {s: set(g.huc8) for s, g in self.cross.groupby('state_abbr')}
@@ -161,14 +164,7 @@ class DashboardData:
         return frame
 
     def watershed_values(self, year, scenario):
-        frame = self.huc_lookup[(int(year), scenario)].copy()
-        cols = ['cluster_id', 'cluster_label', 'hotspot_category', 'scenario_robust']
-        frame = frame.join(self.context_lookup[cols])
-        frame['crpi_equal'] = np.nan
-        if int(year) == 2030:
-            scores = self.crpi.loc[self.crpi.screening_scenario.eq(scenario)].set_index('huc8')
-            frame['crpi_equal'] = scores.crpi_equal
-        return frame
+        return self.huc_lookup[(int(year), scenario)]
 
     def proximity(self, huc8=None, national=False):
         key = ('huc8', huc8) if huc8 else (('national', 'all') if national else None)
@@ -189,6 +185,43 @@ def aggregate(frame):
     values['co2_modeled_sites'] = int(frame.annual_co2_metric_tonnes.notna().sum())
     values['water_modeled_sites'] = int(frame.annual_water_scarcity_footprint_m3_eq.notna().sum())
     return values
+
+
+def demo_examples(data):
+    """Select distinct, navigable examples from complete saved estimates."""
+    from shapely.geometry import box
+
+    central = data.watershed_values(2030, 'central')
+    scarcity = central.annual_water_scarcity_footprint_m3_eq
+    population = central.unique_population_within_5km
+    energy = central.projected_energy_mwh
+    ranks = pd.DataFrame({
+        scenario: data.watershed_values(2030, scenario).annual_water_scarcity_footprint_m3_eq.rank(pct=True)
+        for scenario in PAIRS
+    })
+    spread = (ranks.max(axis=1) - ranks.min(axis=1)).where(ranks.notna().all(axis=1))
+    high = scarcity.ge(scarcity.quantile(.75))
+    cases = [
+        ('High scarcity footprint · lower nearby population', scarcity.where(high & population.le(population.median()))),
+        ('High scarcity footprint · higher nearby population', scarcity.where(high & population.gt(population.median()))),
+        ('High electricity demand · lower scarcity footprint', energy.where(energy.ge(energy.quantile(.75)) & scarcity.le(scarcity.quantile(.75)))),
+        ('Emerging hotspot', scarcity.where(central.hotspot_category.eq('emerging_hotspot'))),
+        ('Hotspot with changing scarcity rank', spread.where(ranks.max(axis=1).ge(.75) & ranks.min(axis=1).lt(.75))),
+    ]
+    contiguous = box(-126, 24, -65, 50)
+    navigable = data.geometry.loc[data.geometry.geometry.within(contiguous), 'huc8']
+    result = {}
+    for label, scores in cases:
+        valid = scores.reindex(navigable).dropna().sort_values(ascending=False, kind='stable')
+        for huc in valid.index:
+            if huc in result:
+                continue
+            links = data.cross.loc[data.cross.huc8.eq(huc)].sort_values(
+                ['modeled_site_count_in_state', 'state_abbr'], ascending=[False, True])
+            if not links.empty and data.site_values(2030, 'central', huc8=huc).projected_energy_mwh.notna().any():
+                result[huc] = (links.iloc[0].state_abbr, f'{label} · {data.huc_names[huc]}')
+                break
+    return result
 
 
 def read_annual_states(source, cache, cache_meta):
@@ -222,13 +255,19 @@ def read_annual_states(source, cache, cache_meta):
 
 
 @lru_cache(maxsize=1)
-def load_data():
-    if not (PRE / 'huc8_dashboard_geometry.geojson').exists():
+def load_data(presentation=False):
+    if not presentation and not (PRE / 'huc8_dashboard_geometry.geojson').exists():
         prepare()
     sites = pd.read_csv(PRE / 'master_sites_with_huc8.csv', dtype={'state_fips': str})
     sites.huc8 = huc_ids(sites.huc8)
-    annual = read_annual_states(OUT / 'stateful_community_resource_simulation_2023_2030.csv',
-                                PRE / 'dashboard_site_states.csv', PRE / 'dashboard_site_states.json')
+    cache, manifest = PRE / 'dashboard_site_states.csv', PRE / 'dashboard_site_states.json'
+    if presentation:
+        metadata = json.loads(manifest.read_text())
+        if metadata.get('schema_version') != 2 or hashlib.sha256(cache.read_bytes()).hexdigest() != metadata.get('cache_sha256'):
+            raise ValueError('Dashboard site snapshot failed checksum validation. Refresh it with python3 -m src.dashboard.validate.')
+        annual = pd.read_csv(cache, dtype={'huc8': str}, low_memory=False)
+    else:
+        annual = read_annual_states(OUT / 'stateful_community_resource_simulation_2023_2030.csv', cache, manifest)
     assert not annual.duplicated(['site_id', 'year', 'screening_scenario']).any()
     assert len(annual) == len(sites) * 8 * 3
     profiles = pd.read_csv(OUT / 'huc8_dynamic_profiles_2023_2030.csv', dtype={'huc8': str})
@@ -240,6 +279,13 @@ def load_data():
                          set(pd.read_csv(OUT / 'huc8_lower_pressure_candidates.csv', dtype={'huc8': str}).huc8),
                          pd.read_csv(PRE / 'stateful_unique_population_5km.csv', dtype={'group_id': str}))
     data.crpi = pd.read_csv(OUT / 'huc8_crpi_scenario_sensitivity_2030.csv', dtype={'huc8': str})
+    scores = data.crpi.set_index(['screening_scenario', 'huc8']).crpi_equal
+    context_columns = ['cluster_id', 'cluster_label', 'hotspot_category', 'scenario_robust']
+    for (year, scenario), frame in data.huc_lookup.items():
+        values = frame.join(data.context_lookup[context_columns])
+        values['crpi_equal'] = scores.xs(scenario) if year == 2030 else np.nan
+        data.huc_lookup[(year, scenario)] = values
+    data.demo_examples = demo_examples(data)
     assert set(data.context.huc8) == set(data.geometry.huc8)
     return data
 

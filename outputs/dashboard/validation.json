@@ -103,10 +103,5 @@
   "back_reset_verified": true,
   "http_callback_tracebacks": 0,
   "manual_browser_validation": "Not performed: Computer Use access to Chrome was not approved.",
-  "screenshots": "Manual capture instructions in outputs/dashboard/README.md; no synthetic screenshots.",
-  "tests": {
-    "passed": 160,
-    "subtests_passed": 41,
-    "failed": 0
-  }
+  "screenshots": "Manual capture instructions in outputs/dashboard/README.md; no synthetic screenshots."
 }

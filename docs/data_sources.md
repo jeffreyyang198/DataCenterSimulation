@@ -45,10 +45,12 @@ previously consumed water remains permanently unavailable in the watershed.
 
 ### Electricity and eGRID
 
-The existing input energy scenario is
-`data/processed/energy_scenarios/floor_area_1.0/low_ai_inference.csv`. It uses the
-project's low power-density, AI-inference assumptions and an explicit assumed
-floor-area multiplier of 1.0; energy is not measured site consumption.
+The current simulation uses `data/processed/data_centers_with_energy_climate.csv`.
+It applies low power density, AI inference and an assumed floor-area multiplier
+of 1.0. NOAA cooling-degree-day climatology and published operator PUE are used
+to fit site PUE. The fixed-PUE comparison uses
+`data/processed/energy_scenarios/floor_area_1.0/low_ai_inference.csv`.
+Both are modeled estimates. See the [methodology](methodology.md).
 
 EPRI's `data/raw/epri/EPRI_2024_Projections.xlsx` is processed by the existing
 `load_epri_projections`, `project_epri_annual` and
@@ -151,9 +153,8 @@ the number of data-center records.
 
 ### NASA background projected climate conditions
 
-Project inspection found no finalized site climate CSV, so the user-supplied
-`/Users/yeritmaryrodriguezdelgado/Downloads/processed_data_2023_2030-1.csv` is
-preserved under `data/raw/nasa/`, with source path and SHA-256 metadata. This
+The supplied `processed_data_2023_2030-1.csv` is preserved under
+`data/raw/nasa/` with local source and SHA-256 metadata. This
 supplied processed table contains 11,792 site-year records, 1,474 sites, eight
 years (2023–2030), `ssp245` (SSP2-4.5), and `n_models = 1`. The pipeline validates
 the actual selected file's keys, years, site inventory and single-model metadata

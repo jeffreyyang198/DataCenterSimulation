@@ -1,8 +1,8 @@
 {
-  "created_utc": "2026-11-11T22:46:01.808391+00:00",
+  "created_utc": "2026-11-18T20:02:21.033422+00:00",
   "climate_path": "data/raw/nasa/processed_data_2023_2030-1.csv",
   "input_sha256": {
-    "data/processed/energy_scenarios/floor_area_1.0/low_ai_inference.csv": "c298fa5bf6dc10e6de0e291cf867f55a9dcebbbb56d4b3f3255205774001a64f",
+    "data/processed/data_centers_with_energy_climate.csv": "84ba8182ca5adb5aacc4f6c29d597276c4c3e366b3a27f06b0c83d419464a6ad",
     "data/raw/nasa/processed_data_2023_2030-1.csv": "9e4a82ec6039a647535fe3e614d1414eae63cd9b5f5e8ad34f65b570c1cba1c6",
     "data/processed/master_sites_with_huc8.csv": "e7a0f1159b37af4d580bdb3ef8f35afea75e8c5bffeff39d8176f5bd69b55895",
     "data/processed/community_exposure_acs2023.csv": "de323598201c2b2f85dcf1b815a4c5ec93d664ab0a4dc3eb9458648235256e59",
@@ -16,9 +16,9 @@
   },
   "implementation_sha256": {
     "src/model/stateful_community.py": "e5c0af32c0fe7fd9fedc4c40a17314316be5317c46d79321dfc783fef3b0fdde",
-    "src/analysis/stateful_community_simulation.py": "ab4baacfcff37ef24d59fa311fbd184a0365b06834d592209f829c84d2379979",
+    "src/analysis/stateful_community_simulation.py": "01b137a36f48c33b55cbcf5b0136cfb974375b05e2c283a42c866ebebc56e097",
     "src/analysis/plot_stateful_community.py": "cc90966bd1142b3b091cd830c8114dfac95e4f2f4160fc0e319e87b4d6cd43dd",
-    "docs/data_sources.md": "0843541ef12e6aeaec625e3af42a78abc5dcb8d6e0ebd557ad72c6dae8a1e2ce"
+    "docs/data_sources.md": "6b72b4540a4c831ebae4f0cbb6fe07073803f633d4f1659c7a43f13ef31512f0"
   },
   "direct_water_coefficient": {
     "value": 1.8,
@@ -27,7 +27,11 @@
     "section": "Direct water footprint of data centers",
     "verification_basis": "User-supplied source passage and implementation, recorded in docs/data_sources.md; original HTML not located locally."
   },
-  "energy_basis": "Existing low_ai_inference, floor-area multiplier 1.0; validated EPRI growth math unchanged",
+  "energy_basis": "Low density, AI inference, floor-area multiplier 1.0",
+  "energy_pue_mode": "climate_fitted",
+  "energy_pue_source_counts": {
+    "climate_fitted": 1237
+  },
   "aqueduct_missing_baseline_fields": [
     "available_blue_water",
     "gross_water_demand"

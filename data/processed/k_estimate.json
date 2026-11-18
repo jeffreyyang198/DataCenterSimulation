@@ -1,0 +1,273 @@
+{
+  "k_fitted": 0.28914221275282004,
+  "k_by_operator": {
+    "AWS": 0.45126007319065076,
+    "Google": 0.21663251202847372,
+    "Microsoft": 0.4017781956957311
+  },
+  "facilities_used": 29,
+  "reference_cdd_sites": 1299.1827394725765,
+  "facilities": [
+    {
+      "site_id": "AWS: US East (Northern Virginia)",
+      "operator": "AWS",
+      "pue": 1.15,
+      "cdd_annual": 1365.447272727273,
+      "operator_mean_cdd": 1098.5197050044537,
+      "x": 0.2429884202411618,
+      "y": 0.15384615384615286
+    },
+    {
+      "site_id": "AWS: US East (Ohio)",
+      "operator": "AWS",
+      "pue": 1.12,
+      "cdd_annual": 1111.81510178662,
+      "operator_mean_cdd": 1098.5197050044537,
+      "x": 0.01210301164521435,
+      "y": -0.07692307692307632
+    },
+    {
+      "site_id": "AWS: US West (Oregon)",
+      "operator": "AWS",
+      "pue": 1.12,
+      "cdd_annual": 818.2967404994678,
+      "operator_mean_cdd": 1098.5197050044537,
+      "x": -0.25509143188637645,
+      "y": -0.07692307692307632
+    },
+    {
+      "site_id": "Google: Berkeley County, SC",
+      "operator": "Google",
+      "pue": 1.1,
+      "cdd_annual": 2660.525454545455,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": 0.6905199576927269,
+      "y": 0.19047619047619047
+    },
+    {
+      "site_id": "Google: Bristow, VA",
+      "operator": "Google",
+      "pue": 1.09,
+      "cdd_annual": 1365.447272727273,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.13238346892007857,
+      "y": 0.0714285714285714
+    },
+    {
+      "site_id": "Google: Central Ohio (Columbus), OH",
+      "operator": "Google",
+      "pue": 1.06,
+      "cdd_annual": 1205.841818181818,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.23379809955431483,
+      "y": -0.2857142857142857
+    },
+    {
+      "site_id": "Google: Central Ohio (Lancaster), OH",
+      "operator": "Google",
+      "pue": 1.04,
+      "cdd_annual": 937.2052350946914,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.40449201428431175,
+      "y": -0.5238095238095238
+    },
+    {
+      "site_id": "Google: Central Ohio (New Albany), OH",
+      "operator": "Google",
+      "pue": 1.07,
+      "cdd_annual": 1205.841818181818,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.23379809955431483,
+      "y": -0.16666666666666663
+    },
+    {
+      "site_id": "Google: Council Bluffs, IA",
+      "operator": "Google",
+      "pue": 1.11,
+      "cdd_annual": 1356.6681818181817,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.1379617761551632,
+      "y": 0.30952380952380953
+    },
+    {
+      "site_id": "Google: Council Bluffs, IA (2nd facility)",
+      "operator": "Google",
+      "pue": 1.08,
+      "cdd_annual": 1356.6681818181817,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.1379617761551632,
+      "y": -0.04761904761904767
+    },
+    {
+      "site_id": "Google: Douglas County, GA",
+      "operator": "Google",
+      "pue": 1.09,
+      "cdd_annual": 1955.9411736143147,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": 0.2428212571387903,
+      "y": 0.0714285714285714
+    },
+    {
+      "site_id": "Google: Henderson, NV",
+      "operator": "Google",
+      "pue": 1.09,
+      "cdd_annual": 3998.4981818181814,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": 1.540678934536475,
+      "y": 0.0714285714285714
+    },
+    {
+      "site_id": "Google: Jackson County, AL",
+      "operator": "Google",
+      "pue": 1.11,
+      "cdd_annual": 1622.784634758703,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": 0.03113082696116708,
+      "y": 0.30952380952380953
+    },
+    {
+      "site_id": "Google: Lenoir, NC",
+      "operator": "Google",
+      "pue": 1.1,
+      "cdd_annual": 1418.673390302893,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.0985631520054794,
+      "y": 0.19047619047619047
+    },
+    {
+      "site_id": "Google: Loudoun County, VA",
+      "operator": "Google",
+      "pue": 1.08,
+      "cdd_annual": 1299.1827394725765,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.17448850338342914,
+      "y": -0.04761904761904767
+    },
+    {
+      "site_id": "Google: Loudoun County, VA (2nd facility)",
+      "operator": "Google",
+      "pue": 1.08,
+      "cdd_annual": 1299.1827394725765,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.17448850338342914,
+      "y": -0.04761904761904767
+    },
+    {
+      "site_id": "Google: Midlothian, TX",
+      "operator": "Google",
+      "pue": 1.11,
+      "cdd_annual": 2722.046773241411,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": 0.7296111142540749,
+      "y": 0.30952380952380953
+    },
+    {
+      "site_id": "Google: Montgomery County, TN",
+      "operator": "Google",
+      "pue": 1.09,
+      "cdd_annual": 1799.7615761638197,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": 0.14358344453925398,
+      "y": 0.0714285714285714
+    },
+    {
+      "site_id": "Google: Omaha, NE",
+      "operator": "Google",
+      "pue": 1.05,
+      "cdd_annual": 968.1896006993104,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.3848042911912788,
+      "y": -0.40476190476190477
+    },
+    {
+      "site_id": "Google: Papillion, NE",
+      "operator": "Google",
+      "pue": 1.09,
+      "cdd_annual": 1113.4269338385109,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.29251928416215667,
+      "y": 0.0714285714285714
+    },
+    {
+      "site_id": "Google: The Dalles, OR",
+      "operator": "Google",
+      "pue": 1.1,
+      "cdd_annual": 1063.3128503421785,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.3243621887911235,
+      "y": 0.19047619047619047
+    },
+    {
+      "site_id": "Google: The Dalles, OR (2nd facility)",
+      "operator": "Google",
+      "pue": 1.06,
+      "cdd_annual": 1063.3128503421785,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.3243621887911235,
+      "y": -0.2857142857142857
+    },
+    {
+      "site_id": "Google: The Dalles, OR (3rd facility)",
+      "operator": "Google",
+      "pue": 1.08,
+      "cdd_annual": 1063.3128503421785,
+      "operator_mean_cdd": 1573.7912128388127,
+      "x": -0.3243621887911235,
+      "y": -0.04761904761904767
+    },
+    {
+      "site_id": "Microsoft: Central US (Iowa)",
+      "operator": "Microsoft",
+      "pue": 1.16,
+      "cdd_annual": 1253.350909090909,
+      "operator_mean_cdd": 2107.4124258334214,
+      "x": -0.4052654839997707,
+      "y": -0.1390134529147985
+    },
+    {
+      "site_id": "Microsoft: East US (Boydton, Virginia)",
+      "operator": "Microsoft",
+      "pue": 1.144,
+      "cdd_annual": 1998.140636884411,
+      "operator_mean_cdd": 2107.4124258334214,
+      "x": -0.05185116477890965,
+      "y": -0.22511210762331868
+    },
+    {
+      "site_id": "Microsoft: West Central US (Wyoming)",
+      "operator": "Microsoft",
+      "pue": 1.125,
+      "cdd_annual": 452.28487012987006,
+      "operator_mean_cdd": 2107.4124258334214,
+      "x": -0.7853837888656254,
+      "y": -0.32735426008968593
+    },
+    {
+      "site_id": "Microsoft: West US 2 (Washington)",
+      "operator": "Microsoft",
+      "pue": 1.156,
+      "cdd_annual": 1025.8093684274174,
+      "operator_mean_cdd": 2107.4124258334214,
+      "x": -0.5132374869519244,
+      "y": -0.16053811659192851
+    },
+    {
+      "site_id": "Microsoft: West US 3 (Arizona)",
+      "operator": "Microsoft",
+      "pue": 1.223,
+      "cdd_annual": 4359.457861377012,
+      "operator_mean_cdd": 2107.4124258334214,
+      "x": 1.0686306144621742,
+      "y": 0.20000000000000062
+    },
+    {
+      "site_id": "Microsoft: South Central US (San Antonio, Texas)",
+      "operator": "Microsoft",
+      "pue": 1.307,
+      "cdd_annual": 3555.4309090909087,
+      "operator_mean_cdd": 2107.4124258334214,
+      "x": 0.6871073101340557,
+      "y": 0.652017937219731
+    }
+  ]
+}

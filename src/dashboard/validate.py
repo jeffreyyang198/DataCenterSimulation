@@ -2,7 +2,9 @@
 import json
 from pathlib import Path
 import re
+from time import perf_counter
 import warnings
+from urllib.parse import urlsplit
 
 import numpy as np
 import pandas as pd
@@ -14,18 +16,25 @@ from .formatting import METRICS
 from .maps import map_figure, temporal_figure
 
 
-def run():
+def run(data=None, *, presentation=False, save_report=True):
     warnings.filterwarnings('ignore', message='Mean of empty slice')
-    data = load_data()
+    data = data or load_data()
     assert data.geometry.subbasin_name.notna().all()
-    app = create_app(data)
+    app = create_app(data, presentation=presentation)
     client = app.server.test_client()
-    assert client.get('/').status_code == 200
+    page = client.get('/')
+    assert page.status_code == 200
+    for asset in re.findall(r'(?:src|href)="([^"]+)"', page.get_data(as_text=True)):
+        parsed = urlsplit(asset)
+        assert not parsed.scheme and not parsed.netloc, asset
+        assert client.get(asset).status_code == 200, asset
+    assert client.get('/health').get_json() == {'status': 'ok'}
     assert client.get('/_dash-layout').status_code == 200
     assert client.get('/_dash-dependencies').status_code == 200
     keys = list(app.callback_map)
     navkey = next(k for k in keys if 'selection.data' in k)
     renderkey = next(k for k in keys if 'map.figure' in k)
+    render_times = []
 
     def post(key, values, changed, previous=None):
         spec = app.callback_map[key]
@@ -34,7 +43,10 @@ def run():
                    'inputs': [{'id': i['id'], 'property': i['property'], 'value': values[i['id']]} for i in spec['inputs']],
                    'state': [{'id': i['id'], 'property': i['property'], 'value': previous} for i in spec['state']],
                    'changedPropIds': [changed]}
+        start = perf_counter()
         response = client.post('/_dash-update-component', json=payload)
+        if key == renderkey:
+            render_times.append(perf_counter() - start)
         assert response.status_code == 200, response.get_data(as_text=True)[:2000]
         return response.get_json()['response']
 
@@ -43,18 +55,25 @@ def run():
                   'state-select': previous['selected_state'], 'huc-select': previous['selected_huc8'],
                   'site-select': previous['selected_site'], 'year': previous['selected_year'],
                   'scenario': previous['selected_scenario'], 'metric': previous['selected_metric'],
-                  'lower-filter': ['lower'] if previous.get('lower_only') else [], 'reset': 0, 'back': 0}
+                  'lower-filter': ['lower'] if previous.get('lower_only') else [], 'reset': 0, 'back': 0,
+                  'clear-site': 0, 'demo': None}
         changed = 'map.clickData'
         if control:
             values[control] = value
-            changed = control + ('.n_clicks' if control in ['reset', 'back'] else '.value')
+            changed = control + ('.n_clicks' if control in ['reset', 'back', 'clear-site'] else '.value')
         return post(navkey, values, changed, previous)['selection']['data']
 
     def render_http(selection):
-        return post(renderkey, {'selection': selection, 'temporal-metric': 'projected_energy_mwh', 'presentation': []}, 'selection.data')
+        return post(renderkey, {'selection': selection, 'temporal-metric': 'projected_energy_mwh',
+                                'presentation': ['on'] if presentation else []}, 'selection.data')
 
     national = render_http(INITIAL)
     assert len(national['map']['figure']['data'][0]['locations']) == 56
+    style = national['map']['figure']['layout']['map']['style']
+    assert style['sources'] == {} and set(style) == {'version', 'sources', 'layers'}
+    assert all(layer['type'] == 'background' for layer in style['layers'])
+    render_http({'selected_state': 'ZZ', 'selected_year': None, 'selected_metric': None,
+                 'selected_scenario': None, 'selected_huc8': 'unknown', 'selected_site': 'unknown'})
     states_checked = []
     crossing = []
     for state in ['AZ', 'VA', 'CA', 'TX', 'NY', 'AK']:
@@ -83,7 +102,10 @@ def run():
     site = next(iter(data.huc_sites[huc]))
     selection = navigate_http(selection, ['site', site])
     response = render_http(selection)
-    assert site in json.dumps(response['summary'])
+    assert 'MODELED SITE' in json.dumps(response['summary'])
+    cleared = navigate_http(selection, control='clear-site', value=1)
+    assert cleared['selected_site'] is None and cleared['selected_huc8'] == huc
+    render_http(cleared)
     base_pop = data.site_values(2030, 'central', huc8=huc).pop_5km
     selection = navigate_http(selection, control='year', value=2025)
     selection = navigate_http(selection, control='scenario', value='higher_pressure')
@@ -104,6 +126,11 @@ def run():
     assert back['selected_huc8'] is None and back['selected_site'] is None and back['selected_state'] == cross_state
     reset = navigate_http(selection, control='reset', value=1)
     assert all(reset[k] is None for k in ['selected_state', 'selected_huc8', 'selected_site'])
+    render_http(reset)
+    for huc, (state, _) in data.demo_examples.items():
+        demo = navigate_http({**INITIAL, 'lower_only': True}, control='demo', value=huc)
+        assert demo['selected_state'] == state and demo['selected_huc8'] == huc and not demo['lower_only']
+        render_http(demo)
     validation = {'status': 'programmatic checks passed', 'national_states': len(data.states),
         'states_with_sites': int(data.sites.state_abbr.nunique()), 'huc8_count': len(data.geometry),
         'site_records': len(data.sites), 'years': [2023, 2030], 'scenarios': list(data.annual.screening_scenario.unique()),
@@ -114,8 +141,11 @@ def run():
         'http_callback_tracebacks': 0,
         'manual_browser_validation': 'Not performed: Computer Use access to Chrome was not approved.',
         'screenshots': 'Manual capture instructions in outputs/dashboard/README.md; no synthetic screenshots.'}
-    (OUT / 'dashboard/validation.json').write_text(json.dumps(validation, indent=2) + '\n')
-    print(json.dumps(validation, indent=2))
+    validation['longest_render_seconds'] = round(max(render_times), 3)
+    if save_report:
+        (OUT / 'dashboard/validation.json').write_text(json.dumps(validation, indent=2) + '\n')
+        print(json.dumps(validation, indent=2))
+    return validation
 
 
 def report():

@@ -11,6 +11,9 @@ CLUSTER_COLORS = ['#226b7a', '#db9246', '#71678e']
 HOTSPOT_COLORS = {'persistent_hotspot': '#226b7a', 'emerging_hotspot': '#cc7335',
                   'rising_watchlist': '#71a5b4', 'existing_constrained': '#7c6998',
                   'lower_pressure': '#d5dfe1', 'not_assessable': '#a5a7a7'}
+LOCAL_MAP_STYLE = {'version': 8, 'sources': {}, 'layers': [
+    {'id': 'background', 'type': 'background', 'paint': {'background-color': '#fafbf8'}},
+]}
 
 
 def feature_collection(features):
@@ -138,7 +141,7 @@ def map_figure(data, selection):
             marker={'size': [15 if s == site else (10 if huc else 7) for s in known.site_id], 'color': colors.tolist(), 'opacity': .9},
             customdata=[['site', r.site_id, r.state_abbr, number(r.projected_energy_mwh, 'MWh'),
                          number(r.aqueduct_water_stress, 'ratio')] for r in known.itertuples()],
-            text=known.site_id.tolist(), hovertemplate='<b>%{text}</b> · %{customdata[2]}<br>%{customdata[3]}<br>Water stress %{customdata[4]}<extra>Click site</extra>',
+            text=known.site_id.map(data.site_identity.site_name).fillna('Modeled site').tolist(), hovertemplate='<b>%{text}</b> · %{customdata[2]}<br>%{customdata[3]}<br>Water stress %{customdata[4]}<extra>Click site</extra>',
             name='Modeled sites · color = water stress', showlegend=True))
         if not selected_state.empty:
             bounds = selected_state.total_bounds.copy()
@@ -146,10 +149,11 @@ def map_figure(data, selection):
                 b = geometry.total_bounds
                 bounds = [min(bounds[0], b[0]), min(bounds[1], b[1]), max(bounds[2], b[2]), max(bounds[3], b[3])]
             center, zoom = viewport(bounds)
-    fig.update_layout(map={'style': 'white-bg', 'center': center, 'zoom': zoom},
+    large = selection.get('projector', False)
+    fig.update_layout(map={'style': LOCAL_MAP_STYLE, 'center': center, 'zoom': zoom},
                       margin={'l': 0, 'r': 0, 't': 0, 'b': 0}, paper_bgcolor='#fafbf8',
-                      font={'family': 'Arial, sans-serif', 'color': '#203a43', 'size': 13},
-                      legend={'orientation': 'h', 'y': -.02, 'x': 0, 'font': {'size': 11}},
+                      font={'family': 'Arial, sans-serif', 'color': '#203a43', 'size': 16 if large else 13},
+                      legend={'orientation': 'h', 'y': -.02, 'x': 0, 'font': {'size': 14 if large else 11}},
                       uirevision=f'{state}-{huc}-{selection.get("lower_only")}', clickmode='event+select')
     return fig
 

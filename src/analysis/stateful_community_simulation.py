@@ -168,12 +168,21 @@ def validate(states,climate,national,population_context):
             'missing values preserved','dissolved national population'])
 
 
-def build_artifacts(nasa_source=None):
+def build_artifacts(nasa_source=None, *, baseline_pue=False):
     climate_path=locate_nasa(nasa_source)
     print('NASA source:',climate_path.resolve(),flush=True)
     climate=pd.read_csv(climate_path,dtype={'site_id':str})
-    sites_path=PRE/'energy_scenarios/floor_area_1.0/low_ai_inference.csv'
+    sites_path=(PRE/'energy_scenarios/floor_area_1.0/low_ai_inference.csv' if baseline_pue
+                else PRE/'data_centers_with_energy_climate.csv')
+    if not sites_path.is_file():
+        raise FileNotFoundError(f'Missing energy input {sites_path}. See the Climate-adjusted PUE scenario in README.md.')
     sites=pd.read_csv(sites_path,dtype={'site_id':str})
+    if not baseline_pue:
+        expected={'power_density_scenario':'low','workload_scenario':'ai_inference','floor_area_multiplier':1.0}
+        if any(column not in sites or not sites[column].eq(value).all() for column,value in expected.items()):
+            raise ValueError('Climate energy input must use low density, AI inference, and a 1.0 floor-area multiplier')
+        if 'pue_source' not in sites or not sites.pue_source.isin(['climate_fitted','scenario_fallback']).all():
+            raise ValueError('Climate energy input must identify fitted and fallback PUE values')
     water=pd.read_csv(PRE/'master_sites_with_huc8.csv',dtype={'site_id':str,'huc8':str})
     population=pd.read_csv(PRE/'community_exposure_acs2023.csv',dtype={'site_id':str})
     basins=pd.read_csv(PRE/'site_aqueduct_basins.csv',dtype={'site_id':str,'pfaf_id':str})
@@ -196,6 +205,7 @@ def build_artifacts(nasa_source=None):
     national['presentation_scenario']=[
         PRESENTATION_PAIRS.get((a,b),'sensitivity_grid')
         for a,b in zip(national.epri_scenario,national.aqueduct_scenario)]
+    report=validate(states,climate,national,pop)
     national.to_csv(OUT/f'{STEM}_summary_2023_2030.csv',index=False)
     for field,name in [('huc8','huc8'),('pfaf_id','aqueduct')]:
         subset=states[states[field].notna()]
@@ -216,7 +226,6 @@ def build_artifacts(nasa_source=None):
     states.to_csv(OUT/f'{STEM}_simulation_2023_2030.csv',index=False)
     frames=national[national.presentation_scenario.eq('central_2030_screening')].rename(columns={'total_projected_energy_mwh':'projected_energy_mwh'})
     frames.to_csv(OUT/'simulation_animation_frames_2023_2030.csv',index=False)
-    report=validate(states,climate,national,pop)
     (OUT/'stateful_simulation_validation.json').write_text(json.dumps(report,indent=2)+'\n')
     inputs=[sites_path,climate_path,PRE/'master_sites_with_huc8.csv',PRE/'community_exposure_acs2023.csv',
             PRE/'site_aqueduct_basins.csv',PRE/'emissions/egrid2023_factors.csv',PRE/'emissions/site_egrid_mapping.csv',
@@ -230,7 +239,10 @@ def build_artifacts(nasa_source=None):
             source='Supplied Siddik supplementary notebook Estimating_WF_CF_WSF_of_data_centers.html',
             section='Direct water footprint of data centers',
             verification_basis='User-supplied source passage and implementation, recorded in docs/data_sources.md; original HTML not located locally.'),
-        energy_basis='Existing low_ai_inference, floor-area multiplier 1.0; validated EPRI growth math unchanged',
+        energy_basis='Low density, AI inference, floor-area multiplier 1.0',
+        energy_pue_mode='fixed_scenario' if baseline_pue else 'climate_fitted',
+        energy_pue_source_counts=(sites.loc[sites.estimated_annual_facility_energy_mwh.notna(),'pue_source']
+                                  .value_counts().to_dict() if not baseline_pue else {}),
         aqueduct_missing_baseline_fields=['available_blue_water','gross_water_demand'],
         adjusted_stress_ratio='Not calculated: cm/year cannot be added to m3/year without a verified hydrologic normalization-area basis.',
         interpretation='Screening of mapped site records, not a fully coupled climate-hydrology model or an independently deduplicated national inventory.',
@@ -245,8 +257,9 @@ def build_artifacts(nasa_source=None):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--nasa-source',type=Path)
+    parser.add_argument('--baseline-pue',action='store_true',help='Rebuild using the fixed-PUE energy scenario')
     args=parser.parse_args()
-    build_artifacts(args.nasa_source)
+    build_artifacts(args.nasa_source,baseline_pue=args.baseline_pue)
 
 
 if __name__=='__main__':main()

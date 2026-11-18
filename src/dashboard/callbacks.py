@@ -2,8 +2,8 @@
 import pandas as pd
 from dash import Input, Output, State, ctx, html
 
-from .data import full_watersheds
-from .formatting import HOTSPOTS, METRICS, effective_metric, number
+from .data import PAIRS, full_watersheds
+from .formatting import HOTSPOTS, METRICS, TEMPORAL, effective_metric, number
 from .maps import map_figure, temporal_figure
 
 INITIAL = {'selected_state': None, 'selected_huc8': None, 'selected_site': None,
@@ -17,6 +17,9 @@ def navigate(previous, kind, identifier, data=None):
         state.update(selected_state=None, selected_huc8=None, selected_site=None)
     elif kind == 'back':
         state.update(selected_huc8=None, selected_site=None)
+    elif kind == 'demo' and identifier in data.demo_examples:
+        state.update(selected_state=data.demo_examples[identifier][0], selected_huc8=identifier,
+                     selected_site=None, lower_only=False)
     elif kind == 'state':
         if data is None or identifier is None or identifier in set(data.states.state_abbr):
             state.update(selected_state=identifier, selected_huc8=None, selected_site=None)
@@ -30,14 +33,33 @@ def navigate(previous, kind, identifier, data=None):
         elif data is None:
             state['selected_site'] = identifier
         else:
-            sites = data.sites.set_index('site_id')
+            sites = getattr(data, 'site_identity', None)
+            if sites is None:
+                sites = data.sites.set_index('site_id')
             if identifier in sites.index:
                 site = sites.loc[identifier]
                 # A selected watershed intentionally permits its cross-state records.
-                allowed = site.huc8 == state['selected_huc8'] if state['selected_huc8'] else site.state_abbr == state['selected_state']
+                allowed = (pd.notna(site.huc8) and site.huc8 == state['selected_huc8']
+                           if state['selected_huc8'] else site.state_abbr == state['selected_state'])
                 if allowed:
                     state['selected_site'] = identifier
                     state['selected_huc8'] = None if pd.isna(site.huc8) else site.huc8
+    return state
+
+
+def normalize_selection(previous, data):
+    state = {**INITIAL, **(previous if isinstance(previous, dict) else {})}
+    if state['selected_state'] not in data.state_names:
+        state = navigate(state, 'reset', None)
+    if state['selected_huc8'] not in data.state_hucs.get(state['selected_state'], set()):
+        state['selected_huc8'] = None
+    allowed_sites = (data.huc_sites.get(state['selected_huc8'], set()) if state['selected_huc8']
+                     else data.state_sites.get(state['selected_state'], set()))
+    if state['selected_site'] not in allowed_sites:
+        state['selected_site'] = None
+    for key, valid in [('selected_year', range(2023, 2031)), ('selected_scenario', PAIRS), ('selected_metric', METRICS)]:
+        if state[key] not in valid:
+            state[key] = INITIAL[key]
     return state
 
 
@@ -45,7 +67,8 @@ def metric_rows(values, fields):
     children = []
     for field, label, unit in fields:
         if field in values:
-            children.extend([html.Dt(label), html.Dd(number(values[field], unit))])
+            formatted = number(values[field], unit)
+            children.extend([html.Dt(label), html.Dd('Data unavailable' if formatted == 'Not available' else formatted)])
     return html.Dl(children, className='metrics-list')
 
 
@@ -73,12 +96,12 @@ def summary_panel(data, selection):
     frame = data.site_values(year, scenario, state=state, huc8=huc)
     if site and site in frame.index:
         row = frame.loc[site]
-        identity = data.sites.set_index('site_id', drop=False).loc[site]
+        identity = data.site_identity.loc[site]
         children = [html.Div('MODELED SITE', className='eyebrow'), html.H2(identity.site_name if pd.notna(identity.site_name) else site),
                     html.P(f'{identity.state_abbr} · HUC8 {identity.huc8 if pd.notna(identity.huc8) else "unassigned"}'),
                     html.Div()]
         # Keep identifiers separate from modeled quantities.
-        children[-1] = html.Dl([item for label, key in [('Site ID', 'site_id'), ('Operator', 'operator'), ('Site type', 'site_type')]
+        children[-1] = html.Dl([item for label, key in [('Operator', 'operator'), ('Site type', 'site_type')]
                                for item in [html.Dt(label), html.Dd(str(identity[key]) if pd.notna(identity[key]) else 'Not available')]], className='metrics-list')
         children += [html.H3(f'{year} · {scenario.replace("_", " ")}'), metric_rows(row, MAIN_FIELDS),
                      metric_rows(row, [('aqueduct_water_stress', 'Aqueduct water stress', 'ratio'),
@@ -88,7 +111,8 @@ def summary_panel(data, selection):
                                       ('temperature_mean_c', 'NASA mean temperature', '°C'),
                                       ('warmest_day_mean_c', 'NASA warmest-day mean', '°C')]),
                      html.P('Site values are scenario-based modeled estimates, not measured facility consumption. Population represents proximity, not direct exposure.', className='note')]
-        incomplete = [str(r) for r in [1, 3, 5] if row.get(f'incomplete_pop_{r}km', False)]
+        flags = {r: row.get(f'incomplete_pop_{r}km') for r in (1, 3, 5)}
+        incomplete = [str(r) for r, flag in flags.items() if pd.notna(flag) and flag]
         if incomplete:
             children += [html.P('Partial population coverage at ' + ', '.join(incomplete) + ' km; estimates may be incomplete.', className='note')]
         return children
@@ -98,20 +122,20 @@ def summary_panel(data, selection):
         represented = ', '.join(sorted(data.sites.loc[data.sites.huc8.eq(huc), 'state_abbr'].unique()))
         robust = context.scenario_robust
         robust_label = 'Not assessable' if pd.isna(robust) else ('Top WSF quartile in all three pairs' if bool(robust) else 'Outside robust top WSF quartile')
-        children = [html.Div('FULL WATERSHED', className='eyebrow'), html.H2(f'HUC8 {huc}'),
-                    html.P(data.geometry.set_index('huc8').loc[huc].get('subbasin_name', '')),
+        children = [html.Div('FULL WATERSHED', className='eyebrow'), html.H2(data.huc_names[huc]),
+                    html.P(f'HUC8 {huc}', className='technical'),
                     html.P(f'{represented} · {int(values.site_count)} mapped site records'),
                     html.Div(str(context.cluster_label) if pd.notna(context.cluster_label) else 'Insufficient data for clustering', className='profile-label'),
                     html.P(HOTSPOTS.get(context.hotspot_category, 'Not available')),
                     html.P(robust_label, className='note'),
-                    html.P('Cluster, trajectory and robustness labels summarize the finalized 2030 / 2023–2030 analysis.', className='note')]
+                    html.P('Cluster, trajectory and robustness labels summarize the 2030 / 2023–2030 analysis.', className='note technical')]
         if year == 2030:
             score = data.watershed_values(year, scenario).loc[huc, 'crpi_equal']
             children += [html.P('CRPI · ' + number(score, 'score / 100'), className='profile-label')]
         children += [html.H3(f'{year} · selected scenario'), metric_rows(values, MAIN_FIELDS), metric_rows(values, CONTEXT_FIELDS)]
     else:
         values = data.aggregate_lookup[(state, year, scenario)]
-        name = data.states.set_index('state_abbr').loc[state, 'state_name'] if state else 'United States'
+        name = data.state_names.get(state, 'United States')
         n_hucs = len(data.state_hucs.get(state, set())) if state else len(data.geometry)
         children = [html.Div('STATE SUMMARY' if state else 'NATIONAL OVERVIEW', className='eyebrow'), html.H2(name),
                     html.P(f'{int(values["site_count"]):,} mapped site records · {n_hucs} HUC8 watersheds'),
@@ -122,17 +146,20 @@ def summary_panel(data, selection):
     children += [html.P(f'Available estimates: {frame.projected_energy_mwh.notna().sum():,}/{len(frame):,} electricity; '
                         f'{frame.annual_co2_metric_tonnes.notna().sum():,}/{len(frame):,} CO₂; '
                         f'{frame.annual_water_scarcity_footprint_m3_eq.notna().sum():,}/{len(frame):,} WF/WSF. '
-                        'Sums cover available records; unknowns are not zeros.', className='note')]
+                        'Sums cover available records.', className='note technical')]
     return children
 
 
 def register_callbacks(app, data):
     @app.callback(Output('selection', 'data'), Output('state-select', 'value'), Output('huc-select', 'value'), Output('site-select', 'value'),
+                  Output('demo', 'value'), Output('lower-filter', 'value'),
                   Input('map', 'clickData'), Input('state-select', 'value'), Input('huc-select', 'value'), Input('site-select', 'value'),
                   Input('year', 'value'), Input('scenario', 'value'), Input('metric', 'value'), Input('lower-filter', 'value'),
-                  Input('reset', 'n_clicks'), Input('back', 'n_clicks'), State('selection', 'data'))
-    def update_selection(click, state, huc, site, year, scenario, metric, lower, reset, back, previous):
-        selection = {**INITIAL, **(previous or {})}
+                  Input('reset', 'n_clicks'), Input('back', 'n_clicks'), Input('clear-site', 'n_clicks'),
+                  Input('demo', 'value'), State('selection', 'data'))
+    def update_selection(click, state, huc, site, year, scenario, metric, lower, reset, back, clear, demo, previous):
+        selection = normalize_selection(previous, data)
+        selection.update(selected_year=year, selected_scenario=scenario, selected_metric=metric, lower_only='lower' in (lower or []))
         trigger = ctx.triggered_id
         if trigger == 'map' and click and click.get('points'):
             custom = click['points'][0].get('customdata')
@@ -143,17 +170,26 @@ def register_callbacks(app, data):
             selection = navigate(selection, kind, identifier, data)
         elif trigger in ['reset', 'back']:
             selection = navigate(selection, trigger, None, data)
-        selection.update(selected_year=int(year), selected_scenario=scenario, selected_metric=metric, lower_only='lower' in (lower or []))
+        elif trigger == 'clear-site':
+            selection = navigate(selection, 'site', None, data)
+        elif trigger == 'demo' and demo:
+            selection = navigate(selection, 'demo', demo, data)
+        selection = normalize_selection(selection, data)
         if selection['lower_only'] and selection.get('selected_huc8') not in data.lower_ids:
             selection.update(selected_huc8=None, selected_site=None)
-        return selection, selection['selected_state'], selection['selected_huc8'], selection['selected_site']
+        return (selection, selection['selected_state'], selection['selected_huc8'], selection['selected_site'],
+                None, ['lower'] if selection['lower_only'] else [])
 
     @app.callback(Output('map', 'figure'), Output('summary', 'children'), Output('national-cards', 'children'),
                   Output('temporal', 'figure'), Output('breadcrumb', 'children'), Output('map-note', 'children'),
                   Output('huc-select', 'options'), Output('site-select', 'options'), Output('shell', 'className'),
+                  Output('year-indicator', 'children'), Output('back', 'disabled'), Output('clear-site', 'disabled'),
                   Input('selection', 'data'), Input('temporal-metric', 'value'), Input('presentation', 'value'))
     def render(selection, temporal_metric, presentation):
-        selection = selection or INITIAL
+        selection = normalize_selection(selection, data)
+        selection['projector'] = 'on' in (presentation or [])
+        if temporal_metric not in TEMPORAL:
+            temporal_metric = 'projected_energy_mwh'
         state, huc = selection['selected_state'], selection['selected_huc8']
         year, scenario = selection['selected_year'], selection['selected_scenario']
         national = data.aggregate_lookup[(None, year, scenario)]
@@ -168,17 +204,16 @@ def register_callbacks(app, data):
             note += ' CRPI is validated for 2030 only; this year shows WSF.'
         if metric in ['cluster_id', 'hotspot_category', 'scenario_robust'] and state:
             note += ' Saved 2030 / trajectory classification; labels do not change with year.'
-        if metric == 'cluster_id' and state:
-            note += ' ' + ' · '.join(f'C{i}: {data.context.loc[data.context.cluster_id.eq(i), "cluster_label"].iloc[0]}' for i in range(3))
         if selection.get('lower_only'):
-            note += ' Filter: seven comparatively lower-pressure watersheds under central-2030 criteria. Summary totals retain the full selected geography.'
+            note += ' Lower-pressure filter applies to the map. Summary totals cover the full selection.'
         geometry = full_watersheds(data.geometry, data.cross, state, data.lower_ids if selection.get('lower_only') else None) if state else data.geometry.iloc[:0]
-        huc_options = [{'label': f'{r.huc8} · {getattr(r, "subbasin_name", "")}', 'value': r.huc8} for r in geometry.sort_values('huc8').itertuples()]
+        huc_options = [{'label': r.subbasin_name, 'value': r.huc8} for r in geometry.sort_values('subbasin_name').itertuples()]
         sites = data.site_values(year, scenario, state=state, huc8=huc) if state else data.annual.iloc[:0]
         if selection.get('lower_only'):
             sites = sites.loc[sites.huc8.isin(set(geometry.huc8))]
-        identities = data.sites.set_index('site_id')
-        site_options = [{'label': f'{identities.loc[r.site_id, "site_name"]} · {r.state_abbr} · {r.site_id}', 'value': r.site_id} for r in sites.itertuples()]
+        site_options = [{'label': f'{data.site_identity.loc[r.site_id, "site_name"]} · {r.state_abbr}', 'value': r.site_id}
+                        for r in sites.itertuples()]
         return (map_figure(data, selection), summary_panel(data, selection), cards,
                 temporal_figure(data, selection, temporal_metric), crumb, note, huc_options, site_options,
-                'dashboard presentation' if 'on' in (presentation or []) else 'dashboard')
+                'dashboard presentation' if selection['projector'] else 'dashboard',
+                str(year), not bool(state and huc), not bool(selection.get('selected_site')))

@@ -1,6 +1,7 @@
 """Apply explicit density, floor-area, and workload scenarios to cleaned IM3 sites."""
 
 import argparse
+import math
 from pathlib import Path
 
 import pandas as pd
@@ -54,6 +55,7 @@ def apply_energy_model(
     workload_parameters: dict[str, float],
     power_density_scenario: str = 'reference',
     workload_scenario: str = 'ai_training',
+    climate_pue: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     """Return a copy with scenario metadata, estimates, and exclusion statuses.
 
@@ -61,6 +63,8 @@ def apply_energy_model(
     scenario for every row; numeric estimates remain missing on excluded rows.
     Missing footprint status applies only to buildings; campus/point exclusions
     take precedence. Malformed or nonpositive building areas raise ValueError.
+    When climate_pue is supplied, pue_k_fitted overrides scenario PUE by site ID.
+    Unmatched sites and sites with missing fitted values use the scenario PUE.
     """
     if missing := {'site_type', 'square_feet'} - set(sites.columns):
         raise ValueError(f'Missing site columns: {sorted(missing)}')
@@ -84,10 +88,29 @@ def apply_energy_model(
     result['utilization'] = utilization
     result['idle_fraction'] = idle_fraction
     result['pue'] = pue
+    if climate_pue is not None:
+        if 'site_id' not in sites:
+            raise ValueError('Climate PUE requires a site_id column in the model sites')
+        site_ids = sites.site_id.astype('string')
+        if site_ids.isna().any() or site_ids.str.strip().eq('').any() or site_ids.duplicated().any():
+            raise ValueError('Climate PUE requires unique, nonmissing model site IDs')
+        if missing := {'site_id', 'pue_k_fitted'} - set(climate_pue.columns):
+            raise ValueError(f'Missing climate PUE columns: {sorted(missing)}')
+        ids = climate_pue.site_id.astype('string')
+        if ids.isna().any() or ids.str.strip().eq('').any() or ids.duplicated().any():
+            raise ValueError('Climate PUE site IDs must be present and unique')
+        fitted = pd.to_numeric(climate_pue.pue_k_fitted, errors='raise').astype(float)
+        if not fitted.dropna().map(lambda value: math.isfinite(value) and value >= 1).all():
+            raise ValueError('Fitted PUE must be finite and at least 1')
+        matched = site_ids.map(pd.Series(fitted.to_numpy(), index=ids))
+        if not matched.notna().any():
+            raise ValueError('No modeled site IDs matched a usable fitted PUE')
+        result['pue'] = matched.fillna(pue).astype(float)
+        result['pue_source'] = matched.notna().map({True: 'climate_fitted', False: 'scenario_fallback'})
 
     estimates = []
     statuses = []
-    for row in sites.itertuples(index=False):
+    for row in result.itertuples(index=False):
         if row.site_type in ('campus', 'point'):
             status = f'{row.site_type}_not_supported'
         elif pd.isna(row.square_feet):
@@ -102,7 +125,7 @@ def apply_energy_model(
             footprint = pd.to_numeric(row.square_feet, errors='raise')
             rated = estimate_rated_power_from_im3(footprint, floor_area_multiplier, density, 'building')
             average = estimate_average_it_power(rated, utilization, idle_fraction)
-            annual = estimate_annual_facility_energy(average, pue)
+            annual = estimate_annual_facility_energy(average, row.pue)
             estimates.append([footprint * floor_area_multiplier, rated, average, annual])
         statuses.append(status)
 
@@ -115,6 +138,7 @@ def apply_simulation_scenario(
     sites: pd.DataFrame,
     summary: dict[str, float | int],
     scenario: SimulationScenario,
+    climate_pue: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     """Run the existing energy model using a SimulationScenario object.
 
@@ -133,6 +157,7 @@ def apply_simulation_scenario(
         workload_parameters=scenario.workload_parameters,
         power_density_scenario=scenario.power_density_scenario,
         workload_scenario=scenario.workload,
+        climate_pue=climate_pue,
     )
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -141,6 +166,8 @@ def main() -> None:
                         help='Explicit gross-area / footprint scenario; default 1.0 = single-story scenario')
     parser.add_argument('--workload-scenario', default='ai_training',
                         help='Name in energy_scenarios.csv (default: ai_training)')
+    parser.add_argument('--climate-pue', type=Path, help='CSV with site_id and pue_k_fitted')
+    parser.add_argument('--output', type=Path, help='Destination for the energy estimates')
     args = parser.parse_args()
 
     calibration = load_power_density_calibration()
@@ -148,10 +175,15 @@ def main() -> None:
     parameters = load_energy_scenario(args.workload_scenario)
     # Prevent leading-zero loss and preserve literal text such as "NA".
     sites = pd.read_csv(INPUT_FILE, dtype='string', keep_default_na=False, na_values=[''])
+    climate_pue = pd.read_csv(args.climate_pue, dtype={'site_id': 'string'},
+                              keep_default_na=False, na_values=['']) if args.climate_pue else None
     result = apply_energy_model(sites, summary, args.floor_area_multiplier, parameters,
-                                args.power_density_scenario, args.workload_scenario)
-    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    result.to_csv(OUTPUT_FILE, index=False)
+                                args.power_density_scenario, args.workload_scenario, climate_pue)
+    output = args.output or (
+        OUTPUT_FILE.with_stem(f'{OUTPUT_FILE.stem}_climate') if args.climate_pue else OUTPUT_FILE
+    )
+    output.parent.mkdir(parents=True, exist_ok=True)
+    result.to_csv(output, index=False)
 
     print(f"Calibration count: {summary['count']}")
     for key in ['q25', 'median', 'q75']:
@@ -163,7 +195,10 @@ def main() -> None:
     counts = result.energy_estimate_status.value_counts()
     for status in ['estimated_building', 'missing_footprint', 'campus_not_supported', 'point_not_supported']:
         print(f'{status}: {counts.get(status, 0)}')
-    print(f'Saved {OUTPUT_FILE}')
+    if climate_pue is not None:
+        print(result.loc[result.energy_estimate_status == 'estimated_building', 'pue_source']
+              .value_counts().to_string())
+    print(f'Saved {output}')
 
 
 if __name__ == '__main__':

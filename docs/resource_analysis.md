@@ -102,7 +102,7 @@ test and source-hash records. Population summaries dissolve overlapping buffers.
 No MP4/GIF is produced. See [source and method documentation](data_sources.md).
 
 The ACS 2023 / TIGER 2023 / Aqueduct 4.0 rebuild is documented in
-[community resource pressure provenance](manual/community_resource_pressure_provenance.md).
+[community resource pressure provenance](../manual/community_resource_pressure_provenance.md).
 Run `.venv/bin/python src/pipeline/fetch_acs2023.py` to normalize the cached
 Census population table, then
 `.venv/bin/python -m src.pipeline.community_resource_pressure` to rebuild
@@ -254,7 +254,7 @@ unchanged. Missing matches remain in the output with blank parameters and flags.
 
 ## Verified area definition and power equation constraint
 
-The bundled [IM3 README.pdf](data/raw/im3/p147s-4h760/im3_open_source_data_center_atlas_v2026.02.09/README.pdf), page 2, defines `sqft` as “surface area of facility polygon, measured in square feet.” It is available only for building and campus types. The same page describes polygon geometry as area footprint. Thus `square_feet` records building footprint or campus polygon area according to `site_type`; the README does not establish total floor area, usable floor area, or IT/white-space area. It supplies no conversion to those quantities. Page 1 explicitly warns that campus and individual building polygons can overlap and that both are retained.
+Page 2 of the IM3 README bundled with the [local source archive](../data/README.md), defines `sqft` as “surface area of facility polygon, measured in square feet.” It is available only for building and campus types. The same page describes polygon geometry as area footprint. Thus `square_feet` records building footprint or campus polygon area according to `site_type`; the README does not establish total floor area, usable floor area, or IT/white-space area. It supplies no conversion to those quantities. Page 1 explicitly warns that campus and individual building polygons can overlap and that both are retained.
 
 For a density `D` measured in W/ft², `P_MW = A_basis_ft2 × D_W_per_ft2 / 1,000,000` is usable only when `A_basis` matches the area definition used to derive `D`. Do not substitute IM3 `square_feet` for usable floor area or IT area. First document the density's area basis and whether its power numerator is IT load or total facility load. Any conversion from footprint to the required area needs separately supported assumptions or data; IM3 alone does not supply them. Campus area requires its own treatment, point records have no polygon area, and overlapping campuses/buildings must not be summed without resolving double counting. This is an equation constraint, not a finalized capacity estimate.
 

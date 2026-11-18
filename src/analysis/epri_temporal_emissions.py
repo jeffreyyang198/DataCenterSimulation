@@ -1,5 +1,7 @@
 """Generate 2023-2030 temporal emissions projections."""
 
+import argparse
+
 from pathlib import Path
 
 import pandas as pd
@@ -43,13 +45,15 @@ SUMMARY_OUTPUT = (
 )
 
 
-def build_temporal_emissions():
+def build_temporal_emissions(
+    site_file=SITE_FILE, detail_output=DETAIL_OUTPUT, summary_output=SUMMARY_OUTPUT,
+):
     sites = pd.read_csv(
-        SITE_FILE
+        site_file, dtype={"site_id": str},
     )
 
     mapping = pd.read_csv(
-        MAPPING_FILE
+        MAPPING_FILE, dtype={"site_id": str},
     )
 
     factors = pd.read_csv(
@@ -73,13 +77,13 @@ def build_temporal_emissions():
         state_growth=growth,
     )
 
-    DETAIL_OUTPUT.parent.mkdir(
+    detail_output.parent.mkdir(
         parents=True,
         exist_ok=True,
     )
 
     result.to_csv(
-        DETAIL_OUTPUT,
+        detail_output,
         index=False,
     )
 
@@ -155,8 +159,9 @@ def build_temporal_emissions():
         .cumsum()
     )
 
+    summary_output.parent.mkdir(parents=True, exist_ok=True)
     summary.to_csv(
-        SUMMARY_OUTPUT,
+        summary_output,
         index=False,
     )
 
@@ -214,15 +219,24 @@ def build_temporal_emissions():
     )
 
     print(
-        f"\nSaved detail: {DETAIL_OUTPUT}"
+        f"\nSaved detail: {detail_output}"
     )
 
     print(
-        f"Saved summary: {SUMMARY_OUTPUT}"
+        f"Saved summary: {summary_output}"
     )
 
     return result, summary
 
 
 if __name__ == "__main__":
-    build_temporal_emissions()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--sites", type=Path, help="Site-level energy model CSV")
+    parser.add_argument("--output-dir", type=Path, help="Directory for detail and summary CSVs")
+    args = parser.parse_args()
+    output_dir = args.output_dir or (DETAIL_OUTPUT.parent / "climate_pue" if args.sites else DETAIL_OUTPUT.parent)
+    build_temporal_emissions(
+        args.sites or SITE_FILE,
+        output_dir / DETAIL_OUTPUT.name,
+        output_dir / SUMMARY_OUTPUT.name,
+    )

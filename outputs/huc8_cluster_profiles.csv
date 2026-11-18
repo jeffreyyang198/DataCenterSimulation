@@ -1,11 +1,11 @@
 cluster_id,cluster_label,huc8_count,feature,raw_median,standardized_mean
-0,Higher scarcity-weighted intensity / lower nearby population,26,energy_2030_mwh,116745.99815621616,-0.23237926287952204
-0,Higher scarcity-weighted intensity / lower nearby population,26,annual_co2_2030,33680.13663728381,
-0,Higher scarcity-weighted intensity / lower nearby population,26,cumulative_co2_2023_2030,228565.98361037523,
-0,Higher scarcity-weighted intensity / lower nearby population,26,annual_direct_water_2030_m3,210142.7966811891,
-0,Higher scarcity-weighted intensity / lower nearby population,26,cumulative_direct_water_2023_2030_m3,1426107.4930906764,
-0,Higher scarcity-weighted intensity / lower nearby population,26,water_footprint_2030_m3,1199611.024578704,
-0,Higher scarcity-weighted intensity / lower nearby population,26,water_scarcity_footprint_2030_m3_eq,3412126.557719498,
+0,Higher scarcity-weighted intensity / lower nearby population,26,energy_2030_mwh,117076.85600115023,-0.22891782897995044
+0,Higher scarcity-weighted intensity / lower nearby population,26,annual_co2_2030,34320.39985037543,
+0,Higher scarcity-weighted intensity / lower nearby population,26,cumulative_co2_2023_2030,232911.04885300918,
+0,Higher scarcity-weighted intensity / lower nearby population,26,annual_direct_water_2030_m3,210738.3408020704,
+0,Higher scarcity-weighted intensity / lower nearby population,26,cumulative_direct_water_2023_2030_m3,1430149.0776093677,
+0,Higher scarcity-weighted intensity / lower nearby population,26,water_footprint_2030_m3,1239662.4833705733,
+0,Higher scarcity-weighted intensity / lower nearby population,26,water_scarcity_footprint_2030_m3_eq,3373282.7795344656,
 0,Higher scarcity-weighted intensity / lower nearby population,26,aqueduct_water_stress_median,1.303636752,
 0,Higher scarcity-weighted intensity / lower nearby population,26,aqueduct_water_stress_max,1.321007032,
 0,Higher scarcity-weighted intensity / lower nearby population,26,aqueduct_water_depletion_median,0.405210481,
@@ -21,17 +21,17 @@ cluster_id,cluster_label,huc8_count,feature,raw_median,standardized_mean
 0,Higher scarcity-weighted intensity / lower nearby population,26,population_incomplete_site_count,0.0,
 0,Higher scarcity-weighted intensity / lower nearby population,26,energy_growth_pct_2023_2030,40.710025541844686,
 0,Higher scarcity-weighted intensity / lower nearby population,26,temperature_change_2023_2030_c,0.8910000000000018,0.5708475051252633
-0,Higher scarcity-weighted intensity / lower nearby population,26,scarcity_intensity_m3_eq_per_mwh,45.592,2.033704273491385
-0,Higher scarcity-weighted intensity / lower nearby population,26,carbon_intensity_tonnes_per_mwh,0.28655017586195003,-0.41232611032347066
+0,Higher scarcity-weighted intensity / lower nearby population,26,scarcity_intensity_m3_eq_per_mwh,45.592000000000006,2.033704273491385
+0,Higher scarcity-weighted intensity / lower nearby population,26,carbon_intensity_tonnes_per_mwh,0.28655017586195003,-0.41238419302935714
 0,Higher scarcity-weighted intensity / lower nearby population,26,ml_eligible,1.0,
 0,Higher scarcity-weighted intensity / lower nearby population,26,ml_imputed_feature_count,0.0,
-1,Higher projected temperature change / lower electricity carbon intensity,46,energy_2030_mwh,181897.1320119243,-0.017661740274953923
-1,Higher projected temperature change / lower electricity carbon intensity,46,annual_co2_2030,44585.66009789774,
-1,Higher projected temperature change / lower electricity carbon intensity,46,cumulative_co2_2023_2030,302575.02910520835,
-1,Higher projected temperature change / lower electricity carbon intensity,46,annual_direct_water_2030_m3,327414.8376214637,
-1,Higher projected temperature change / lower electricity carbon intensity,46,cumulative_direct_water_2023_2030_m3,2221959.2536380626,
-1,Higher projected temperature change / lower electricity carbon intensity,46,water_footprint_2030_m3,1015630.4041476371,
-1,Higher projected temperature change / lower electricity carbon intensity,46,water_scarcity_footprint_2030_m3_eq,232527.7291406635,
+1,Higher projected temperature change / lower electricity carbon intensity,46,energy_2030_mwh,176815.14808026794,-0.0353119121742389
+1,Higher projected temperature change / lower electricity carbon intensity,46,annual_co2_2030,44122.37208929421,
+1,Higher projected temperature change / lower electricity carbon intensity,46,cumulative_co2_2023_2030,299430.98416444333,
+1,Higher projected temperature change / lower electricity carbon intensity,46,annual_direct_water_2030_m3,318267.2665444823,
+1,Higher projected temperature change / lower electricity carbon intensity,46,cumulative_direct_water_2023_2030_m3,2159880.423153569,
+1,Higher projected temperature change / lower electricity carbon intensity,46,water_footprint_2030_m3,984415.1270955981,
+1,Higher projected temperature change / lower electricity carbon intensity,46,water_scarcity_footprint_2030_m3_eq,232507.46745129605,
 1,Higher projected temperature change / lower electricity carbon intensity,46,aqueduct_water_stress_median,0.155854303,
 1,Higher projected temperature change / lower electricity carbon intensity,46,aqueduct_water_stress_max,0.155854303,
 1,Higher projected temperature change / lower electricity carbon intensity,46,aqueduct_water_depletion_median,0.041519641,
@@ -45,19 +45,19 @@ cluster_id,cluster_label,huc8_count,feature,raw_median,standardized_mean
 1,Higher projected temperature change / lower electricity carbon intensity,46,wsf_energy_coverage,1.0,
 1,Higher projected temperature change / lower electricity carbon intensity,46,stress_site_coverage,1.0,
 1,Higher projected temperature change / lower electricity carbon intensity,46,population_incomplete_site_count,0.0,
-1,Higher projected temperature change / lower electricity carbon intensity,46,energy_growth_pct_2023_2030,40.710041848043716,
+1,Higher projected temperature change / lower electricity carbon intensity,46,energy_growth_pct_2023_2030,40.71004184804372,
 1,Higher projected temperature change / lower electricity carbon intensity,46,temperature_change_2023_2030_c,1.3104999999999993,1.246711143377456
-1,Higher projected temperature change / lower electricity carbon intensity,46,scarcity_intensity_m3_eq_per_mwh,1.4055,-0.2237597338857401
-1,Higher projected temperature change / lower electricity carbon intensity,46,carbon_intensity_tonnes_per_mwh,0.27075110002248,-0.9656363227862209
+1,Higher projected temperature change / lower electricity carbon intensity,46,scarcity_intensity_m3_eq_per_mwh,1.4055,-0.2237597338857402
+1,Higher projected temperature change / lower electricity carbon intensity,46,carbon_intensity_tonnes_per_mwh,0.27075110002248,-0.9655672136175725
 1,Higher projected temperature change / lower electricity carbon intensity,46,ml_eligible,1.0,
 1,Higher projected temperature change / lower electricity carbon intensity,46,ml_imputed_feature_count,0.0,
-2,Higher electricity carbon intensity / lower projected temperature change,105,energy_2030_mwh,191347.58180922433,0.06527905607157579
-2,Higher electricity carbon intensity / lower projected temperature change,105,annual_co2_2030,78686.65022948687,
-2,Higher electricity carbon intensity / lower projected temperature change,105,cumulative_co2_2023_2030,533996.9588640048,
-2,Higher electricity carbon intensity / lower projected temperature change,105,annual_direct_water_2030_m3,344425.6472566038,
-2,Higher electricity carbon intensity / lower projected temperature change,105,cumulative_direct_water_2023_2030_m3,2337401.4160695877,
-2,Higher electricity carbon intensity / lower projected temperature change,105,water_footprint_2030_m3,1309391.502320522,
-2,Higher electricity carbon intensity / lower projected temperature change,105,water_scarcity_footprint_2030_m3_eq,309973.7265943672,
+2,Higher electricity carbon intensity / lower projected temperature change,105,energy_2030_mwh,200365.56878638672,0.07215439536660606
+2,Higher electricity carbon intensity / lower projected temperature change,105,annual_co2_2030,77334.21713305553,
+2,Higher electricity carbon intensity / lower projected temperature change,105,cumulative_co2_2023_2030,524818.8434091582,
+2,Higher electricity carbon intensity / lower projected temperature change,105,annual_direct_water_2030_m3,360658.0238154961,
+2,Higher electricity carbon intensity / lower projected temperature change,105,cumulative_direct_water_2023_2030_m3,2447559.9905985813,
+2,Higher electricity carbon intensity / lower projected temperature change,105,water_footprint_2030_m3,1346064.5831667911,
+2,Higher electricity carbon intensity / lower projected temperature change,105,water_scarcity_footprint_2030_m3_eq,305868.0341622992,
 2,Higher electricity carbon intensity / lower projected temperature change,105,aqueduct_water_stress_median,0.339795084,
 2,Higher electricity carbon intensity / lower projected temperature change,105,aqueduct_water_stress_max,0.352801594,
 2,Higher electricity carbon intensity / lower projected temperature change,105,aqueduct_water_depletion_median,0.081971995,
@@ -74,6 +74,6 @@ cluster_id,cluster_label,huc8_count,feature,raw_median,standardized_mean
 2,Higher electricity carbon intensity / lower projected temperature change,105,energy_growth_pct_2023_2030,40.71004270087475,
 2,Higher electricity carbon intensity / lower projected temperature change,105,temperature_change_2023_2030_c,-0.05600000000000094,-0.6875309307487599
 2,Higher electricity carbon intensity / lower projected temperature change,105,scarcity_intensity_m3_eq_per_mwh,1.301,-0.4055558414479232
-2,Higher electricity carbon intensity / lower projected temperature change,105,carbon_intensity_tonnes_per_mwh,0.40736178205723,0.5251404734912032
+2,Higher electricity carbon intensity / lower projected temperature change,105,carbon_intensity_tonnes_per_mwh,0.40736178205723,0.5251245794778252
 2,Higher electricity carbon intensity / lower projected temperature change,105,ml_eligible,1.0,
 2,Higher electricity carbon intensity / lower projected temperature change,105,ml_imputed_feature_count,0.0,

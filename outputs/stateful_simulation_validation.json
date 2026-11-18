@@ -17,11 +17,5 @@
     "distinct HUC8/PFAF identifiers",
     "missing values preserved",
     "dissolved national population"
-  ],
-  "test_suite": {
-    "passed": 94,
-    "failed": 0,
-    "log": "stateful_simulation_tests.txt"
-  },
-  "figure_review": "All four final PDFs rendered with native Quartz (sips) and visually checked for legibility and clipping; corresponding PNGs exported."
+  ]
 }

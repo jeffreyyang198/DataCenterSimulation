@@ -173,7 +173,7 @@ See the [rehearsal guide](docs/presentation_demo.md).
 
 Run `python3 -m src.visualization.animate_resource_pressure` with the local source artifacts and an available FFmpeg or supported macOS native encoder to regenerate the animation. The existing video and poster depict the earlier simulation.
 
-## Results
+## Key Results
 
 In the Central screening run, modeled annual facility electricity rises from **194.6 TWh in 2023** to **273.9 TWh in 2030**. Cumulative electricity-related CO₂ reaches **587.5 million metric tonnes** in 2030. The HUC8 analysis classified 43 persistent and two emerging hotspots. See [results and coverage](docs/results.md) and [final tables](outputs/final_tables/README.md).
 

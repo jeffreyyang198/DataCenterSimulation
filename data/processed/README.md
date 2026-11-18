@@ -24,3 +24,14 @@ The dashboard also reads four canonical `outputs/` CSVs for dynamic HUC8 profile
 ## Larger or redundant local intermediates
 
 `tracts_acs2023.gpkg` and `tracts_near_sites.gpkg` are existing tracked tract geometry caches. Neither is needed at dashboard startup. This review leaves the tracked history and retention of both caches to the team. The existing `EPRI_2024_Projections.xlsx` mirror is likewise preserved. The oversized all-scenario site simulation remains local under `outputs/`. The compact dashboard snapshot covers presentation use. See the [GitHub manifest](../../docs/github_manifest.md).
+
+## Classification register
+
+Each retained file is assigned its primary role. Patterns below apply to all matching files, and this README and the emissions README document the inventory.
+
+| Primary role | File or group |
+| --- | --- |
+| Required by dashboard | The seven files listed in Essential dashboard snapshot, counting CSV and JSON separately |
+| Required by reproducible example | `data_centers.csv`, `master_sites.csv`, `table3.csv`, `site_aqueduct_basins.csv`, `community_exposure_acs2023.csv`, `emissions/egrid2023_factors.csv`, `emissions/site_egrid_mapping.csv`, the `energy_scenarios/floor_area_1.0/low_ai_inference.csv` baseline, `huc8_analysis_boundaries.gpkg`, `animation_state_outlines.gpkg` |
+| Final scientific result | `data_centers_with_energy.csv`, `data_centers_with_energy_climate.csv`, `site_pue_climate.csv`, `k_estimate.json`, the other `energy_scenarios/` CSVs, `emissions/data_centers_with_emissions.csv`, `emissions/same_facility_comparison.csv`, `emissions/same_facility_co2_by_subregion.png`, `aqueduct_annual_screening_2023_2030.csv`, `community_exposure.csv` |
+| Intermediate or supporting QA | `EPRI_2024_Projections.xlsx` mirror, `aqueduct2030_normalized.csv`, `us_states_2023.gpkg`, `huc8_dashboard_names.csv`, both `tracts_*.gpkg` caches, `im3_county_review.csv`, `master_sites_with_huc8_review.csv`, `emissions/emissions_review.csv`, and the provenance/report JSON files other than the dashboard snapshot manifest and PUE fit report |

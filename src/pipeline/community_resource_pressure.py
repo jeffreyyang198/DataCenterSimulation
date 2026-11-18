@@ -96,6 +96,7 @@ def normalize_future(frame):
 
 
 def assign_basins(sites, basins):
+    """Assign one Aqueduct PFAF per site, retaining ambiguous candidates."""
     if basins.crs is None or 'pfaf_id' not in basins:
         raise ValueError('Aqueduct polygons require CRS and pfaf_id')
     points = gpd.GeoDataFrame(sites[['site_id']].copy(),

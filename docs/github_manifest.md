@@ -20,7 +20,7 @@ The compact snapshot and its hash manifest, display GeoJSON, site inventory, cro
 
 ## Final tables
 
-[Final tables](../outputs/final_tables/README.md) contains six publication copies. The original tables remain the paths that the dashboard and scripts read. The workspace validation compared copy bytes with their originals.
+[Final tables](../outputs/final_tables/README.md) contains six publication copies. The original tables remain the paths that the dashboard and scripts read. The validation compares each copy with its original.
 
 ## Figures
 
@@ -42,7 +42,7 @@ Git ignores `data/raw/`, including the raw Aqueduct geodatabase and annual CSV, 
 
 ## Large local artifacts
 
-The complete site simulation CSV and the redundant climate-scenario emissions detail CSV remain local. The compact site snapshot and selected summaries are proposed. The size review found no tracked file over 90 MiB. See the [processed dataset guide](../data/processed/README.md) for the larger existing tract caches.
+The complete site simulation CSV and the redundant climate-scenario emissions detail CSV remain local. The compact site snapshot and selected summaries are tracked. The size review found no tracked file over 90 MiB. See the [processed dataset guide](../data/processed/README.md) for the larger existing tract caches.
 
 ## Cache / temporary files
 
@@ -50,4 +50,4 @@ Keep the nested `DataCenterSimulation/` directory outside the review list. Ignor
 
 ## Audit and handoff
 
-The heuristic credential scan reported no matches in 241 existing candidate text files and emitted only filenames and pattern names. New documentation and publication copies received a final targeted scan. No files were staged. Review the proposed paths and the existing tracked inventory before committing or pushing.
+The release review checks the named paths, file sizes, ignore rules and credential patterns. Only filenames and pattern names are reported for potential matches. The review list describes the final submission follow-up, while the history contains the earlier integration package.

@@ -120,6 +120,11 @@ def accumulate(frame, annual_column):
 
 
 def build_states(sites, growth, factors, mapping, water, population, basins, nasa, aqueduct):
+    """Build modeled annual and cumulative site states for each scenario pair.
+
+    NASA and Aqueduct are external context. HUC8 supplies water factors and
+    PFAF supplies basin conditions. WF is in m³ and WSF is in m³-equivalent.
+    """
     for frame,keys,name in [
         (sites,['site_id'],'sites'),(growth,['state_abbr','scenario','year'],'EPRI growth'),
         (factors,['egrid_subregion'],'eGRID'),(mapping,['site_id'],'eGRID mapping'),

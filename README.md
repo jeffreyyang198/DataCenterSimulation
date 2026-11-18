@@ -54,15 +54,17 @@ IM3 supplies facility records, EPA eGRID provides subregions and factors, and EP
 
 ## Installation
 
-Use Python 3.14 for the tested pinned environment, and run commands from the repository root.
+Clone the integration branch and use Python 3.14 for the tested pinned environment.
 
 ```bash
+git clone --branch yeritmary-final-integration https://github.com/jeffreyyang198/DataCenterSimulation.git
+cd DataCenterSimulation
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
-On the presentation Mac, the two shell scripts use the existing `~/.venvs/data-center-impact` environment configured in the launchers. Other installations can use the module commands below.
+The macOS and Linux launchers prefer a repository-local `.venv`. On Windows, use `py -3.14 -m venv .venv`, then run `.\.venv\Scripts\python.exe -m pip install -r requirements.txt` and `.\.venv\Scripts\python.exe -m src.dashboard.presentation` from the repository root.
 
 ## Quick Start
 
@@ -71,7 +73,7 @@ python3 -m scripts.smoke_test_dashboard
 python3 -m src.dashboard.presentation
 ```
 
-Open the printed localhost URL. The compact snapshot supports this workflow without raw inputs.
+Keep the server running and open the printed localhost URL **on the same computer**. A GitHub branch link opens the source files. To use the dashboard on another computer, follow Installation there and start its own server. The compact snapshot includes the data needed for this workflow.
 
 ## Run Tests
 

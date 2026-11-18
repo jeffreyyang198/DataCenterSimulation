@@ -1,0 +1,106 @@
+HUC8 WATERSHED ANALYSIS COMPLETE
+
+HUC8 watersheds analyzed:
+221
+
+Features used:
+energy_2030_mwh
+scarcity_intensity_m3_eq_per_mwh
+carbon_intensity_tonnes_per_mwh
+prop_sites_high_water_stress
+unique_population_within_5km
+temperature_mean_2030_c
+temperature_change_2023_2030_c
+
+Features removed for redundancy:
+cumulative_co2_2023_2030
+annual_direct_water_2030_m3
+cumulative_direct_water_2023_2030_m3
+warmest_day_mean_2030_c
+Energy growth excluded as practically constant at 0.01 percentage-point resolution.
+
+PCA explained variance:
+PC1 25.55%
+PC2 23.40%
+PC1 top positive loadings: {'carbon_intensity_tonnes_per_mwh': 0.6375817542394582, 'prop_sites_high_water_stress': 0.05354674161677155}
+PC1 top negative loadings: {'temperature_change_2023_2030_c': -0.46188249465428377, 'unique_population_within_5km': -0.3807230503379464, 'energy_2030_mwh': -0.322082277214232}
+PC2 top positive loadings: {'temperature_change_2023_2030_c': 0.49322682724814076, 'scarcity_intensity_m3_eq_per_mwh': 0.3157955559259469, 'prop_sites_high_water_stress': 0.014973610618268535}
+PC2 top negative loadings: {'unique_population_within_5km': -0.46702333280358055, 'temperature_mean_2030_c': -0.45531683959082925, 'energy_2030_mwh': -0.4508645275166297}
+
+Chosen cluster count:
+3
+
+Cluster sizes:
+{'0': 26, '1': 46, '2': 105}
+
+Cluster labels:
+0: Higher scarcity-weighted intensity / lower nearby population
+1: Higher projected temperature change / lower electricity carbon intensity
+2: Higher electricity carbon intensity / lower projected temperature change
+
+Persistent hotspots:
+42
+
+Emerging hotspots:
+3
+
+Scenario-robust hotspots (top quartile across all paired scenarios):
+{'CRPI_equal': 40, 'WF': 45, 'WSF': 45}
+
+Lower-pressure watersheds:
+7
+
+CRPI robust top watersheds:
+25
+02030103, 02030105, 02070008, 02070010, 05060001, 07120003, 07120004, 07120007, 10190003, 10230006, 12030102, 12030103, 12030104, 12030105, 12030106, 12100301, 12100302, 13020203, 15010015, 15050100, 15060106, 15070102, 17090010, 18020161, 18050003
+
+Tests:
+118 passed
+38 subtests passed
+0 failed
+
+Files created:
+outputs/huc8_cluster_diagnostics.csv
+outputs/huc8_cluster_profiles.csv
+outputs/huc8_clustering_matrix_2030.csv
+outputs/huc8_clusters_2030.csv
+outputs/huc8_crpi_2030.csv
+outputs/huc8_crpi_robust_hotspots.csv
+outputs/huc8_crpi_scenario_sensitivity_2030.csv
+outputs/huc8_crpi_weight_rank_stability.csv
+outputs/huc8_dashboard_data.csv
+outputs/huc8_dynamic_profiles_2023_2030.csv
+outputs/huc8_feature_correlations.csv
+outputs/huc8_hotspot_trajectory_2023_2030.csv
+outputs/huc8_lower_pressure_candidates.csv
+outputs/huc8_ml_features_2030.csv
+outputs/huc8_ml_preprocessing_report.csv
+outputs/huc8_pca_explained_variance.csv
+outputs/huc8_pca_loadings.csv
+outputs/huc8_pca_scores.csv
+outputs/huc8_population_water_2030.csv
+outputs/huc8_scenario_rank_robustness.csv
+outputs/huc8_top_emerging_hotspots.csv
+outputs/crpi_weight_schemes.csv
+outputs/figures/figure10a_huc8_feature_correlation.png
+outputs/figures/figure10b_pca_explained_variance.png
+outputs/figures/figure10c_huc8_pca_scatter.png
+outputs/figures/figure10d_cluster_diagnostics.png
+outputs/figures/figure10e_huc8_clusters_pca.png
+outputs/figures/figure10f_cluster_profiles.png
+outputs/figures/figure10g_huc8_cluster_map.png
+outputs/figures/figure11a_emerging_hotspots.png
+outputs/figures/figure11b_scenario_rank_robustness.png
+outputs/figures/figure12_huc8_environmental_profiles.png
+outputs/figures/figure10g_huc8_cluster_map.pdf
+outputs/figures/figure12_huc8_environmental_profiles.pdf
+README.md
+docs/data_sources.md
+docs/huc8_analysis.md
+outputs/huc8_analysis_metadata.json
+outputs/huc8_analysis_validation.json
+outputs/huc8_analysis_tests.txt
+outputs/huc8_analysis_completion.txt
+
+Screening profiles and index are not harm predictions or development recommendations.
+No GitHub push. DataCenterSimulation/ unchanged.

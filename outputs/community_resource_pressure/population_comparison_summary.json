@@ -1,0 +1,23 @@
+[
+  {
+    "radius_km": 1,
+    "compared_sites": 1474,
+    "median_signed_difference": 1.8063671981817038,
+    "median_absolute_difference": 2.5610914343060927,
+    "max_absolute_difference": 16855.680144900078
+  },
+  {
+    "radius_km": 3,
+    "compared_sites": 1474,
+    "median_signed_difference": 13.299818679463897,
+    "median_absolute_difference": 41.932649490056065,
+    "max_absolute_difference": 78820.40504345865
+  },
+  {
+    "radius_km": 5,
+    "compared_sites": 1474,
+    "median_signed_difference": 32.01210424302553,
+    "median_absolute_difference": 121.86880801232473,
+    "max_absolute_difference": 153595.93738151694
+  }
+]

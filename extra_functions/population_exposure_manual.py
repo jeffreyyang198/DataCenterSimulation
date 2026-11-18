@@ -217,6 +217,135 @@ def adjust_for_temperature(site_cdd: float,
     return max(0.0, multiplier)
 
 
+# fit_slope() and the two helpers before it
+
+# k used to be a number I picked. These functions estimate it from real data
+# centers that publish their PUE, so it comes from evidence instead.
+# For each facility i:
+#   y_i = how far its PUE overhead sits above or below its operator's average
+#       = (PUE_i - 1) / mean(PUE - 1) - 1
+#   x_i = how far its climate sits above or below its operator's average
+#       = (CDD_i - CDD_ref) / CDD_ref, with CDD_ref the operator's mean CDD
+# adjust_for_temperature() says M = 1 + k * x. If an operator's average
+# overhead is roughly its overhead at its average climate, y is roughly
+# M - 1, so y is roughly k * x and the slope of y against x estimates k.
+# That "roughly" is an assumption, not something the data proves.
+# Comparing inside each operator keeps a company that is efficient
+# everywhere, or one with most buildings in hot places, from looking like
+# a climate effect.
+
+
+def overhead_differences(pue_values: list[float]) -> list[float]:
+    """
+    Express each facility's overhead relative to the group's average overhead.
+
+    Overhead is the part of PUE above 1, mostly cooling:
+        y_i = (PUE_i - 1) / mean(PUE - 1) - 1
+
+    A facility at the group average returns 0, one with 10% more overhead
+    than average returns 0.1.
+
+    Args:
+        pue_values (list[float]): PUE of each facility from one operator.
+    Returns:
+        list[float]: Relative overhead of each facility.
+    """
+    if len(pue_values) < 2:
+        raise ValueError("Need at least two facilities to compare overheads")
+
+    overheads = []
+
+    for pue in pue_values:
+        # PUE is total power over IT power, so it can't be below 1.
+        if not math.isfinite(pue) or pue < 1:
+            raise ValueError("PUE has to be a number of at least 1")
+
+        overheads.append(pue - 1)
+
+    mean_overhead = sum(overheads) / len(overheads)
+
+    # Every facility at exactly PUE 1.0 would leave nothing to compare against.
+    if mean_overhead <= 0:
+        raise ValueError("Average overhead is zero, so nothing to compare")
+
+    return [(overhead / mean_overhead) - 1 for overhead in overheads]
+
+
+def climate_differences(cdd_values: list[float],
+                        reference_cdd: float) -> list[float]:
+    """
+    Express each facility's climate relative to the reference climate.
+
+        x_i = (CDD_i - CDD_ref) / CDD_ref
+
+    This is the same ratio adjust_for_temperature() multiplies by k.
+
+    Args:
+        cdd_values (list[float]): Cooling degree days at each facility.
+        reference_cdd (float): Cooling degree days of the reference climate.
+    Returns:
+        list[float]: Relative climate of each facility.
+    """
+    if not math.isfinite(reference_cdd) or reference_cdd <= 0:
+        raise ValueError("Reference cooling degree days has to be positive")
+
+    differences = []
+
+    for cdd in cdd_values:
+        if not math.isfinite(cdd) or cdd < 0:
+            raise ValueError("Cooling degree days can't be negative or missing")
+
+        differences.append((cdd - reference_cdd) / reference_cdd)
+
+    return differences
+
+
+def fit_slope(x_values: list[float], y_values: list[float]) -> float:
+    """
+    Fit a straight line through the points and return its slope.
+
+    Least squares slope:
+        slope = sum((x - x_mean) * (y - y_mean)) / sum((x - x_mean)^2)
+
+    With x from climate_differences() and y from overhead_differences(),
+    the slope is k.
+
+    Args:
+        x_values (list[float]): Relative climate of each facility.
+        y_values (list[float]): Relative overhead of each facility.
+    Returns:
+        float: The slope, which is the estimate of k.
+    """
+    if len(x_values) != len(y_values):
+        raise ValueError("x and y lists must be the same length")
+
+    # Two points always fit a line exactly, so they say nothing about scatter.
+    if len(x_values) < 3:
+        raise ValueError("Need at least three facilities to fit a slope")
+
+    for value in x_values + y_values:
+        if not math.isfinite(value):
+            raise ValueError("Every x and y has to be a real number")
+
+    x_mean = sum(x_values) / len(x_values)
+    y_mean = sum(y_values) / len(y_values)
+
+    top = 0.0
+    bottom = 0.0
+
+    for x, y in zip(x_values, y_values):
+        top += (x - x_mean) * (y - y_mean)
+        bottom += (x - x_mean) ** 2
+
+    # If every facility had the same climate there is no slope to measure.
+    # Rounding leaves a tiny leftover instead of exactly 0 (the mean of three
+    # 0.1s is 0.10000000000000002), so I compare against a small tolerance.
+    if bottom < 1e-12:
+        raise ValueError("All facilities have the same climate; no slope")
+
+    return top / bottom
+
+
 # Worked example, printing the intermediate values so the arithmetic can be
 # followed by hand. The numbers are made up, not a real site.
 

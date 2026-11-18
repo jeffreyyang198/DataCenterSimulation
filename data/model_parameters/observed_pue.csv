@@ -1,0 +1,33 @@
+operator,location,state_abbr,pue,period,pue_type,latitude,longitude,coord_source,source_url
+Google,"Berkeley County, SC",SC,1.1,2026 Q2 trailing twelve months,TTM,33.0636,-80.0414,IM3 Google records in Berkeley County (mean of 10),https://www.datacenters.google/efficiency
+Google,"Bristow, VA",VA,1.09,2026 Q2 trailing twelve months,TTM,38.7766,-77.5848,IM3 Google records in Prince William County (mean of 3),https://www.datacenters.google/efficiency
+Google,"Central Ohio (Columbus), OH",OH,1.06,2026 Q2 trailing twelve months,TTM,39.9542,-82.8837,IM3 Google records in Franklin County (mean of 4),https://www.datacenters.google/efficiency
+Google,"Central Ohio (Lancaster), OH",OH,1.04,2026 Q2 trailing twelve months,TTM,39.724,-82.6911,IM3 Google records in Fairfield County (mean of 1),https://www.datacenters.google/efficiency
+Google,"Central Ohio (New Albany), OH",OH,1.07,2026 Q2 trailing twelve months,TTM,40.0582,-82.7646,IM3 Google records in Licking County (mean of 4),https://www.datacenters.google/efficiency
+Google,"Council Bluffs, IA",IA,1.11,2026 Q2 trailing twelve months,TTM,41.1779,-95.8054,IM3 Google records in Pottawattamie County (mean of 17),https://www.datacenters.google/efficiency
+Google,"Council Bluffs, IA (2nd facility)",IA,1.08,2026 Q2 trailing twelve months,TTM,41.1779,-95.8054,IM3 Google records in Pottawattamie County (mean of 17),https://www.datacenters.google/efficiency
+Google,"Douglas County, GA",GA,1.09,2026 Q2 trailing twelve months,TTM,33.7506,-84.5852,IM3 Google records in Douglas County (mean of 1),https://www.datacenters.google/efficiency
+Google,"Henderson, NV",NV,1.09,2026 Q2 trailing twelve months,TTM,36.0576,-115.0088,IM3 Google records in Clark County (mean of 3),https://www.datacenters.google/efficiency
+Google,"Jackson County, AL",AL,1.11,2026 Q2 trailing twelve months,TTM,34.9139,-85.7472,IM3 Google records in Jackson County (mean of 3),https://www.datacenters.google/efficiency
+Google,"Lenoir, NC",NC,1.1,2026 Q2 trailing twelve months,TTM,35.8947,-81.5465,IM3 Google records in Caldwell County (mean of 1),https://www.datacenters.google/efficiency
+Google,"Loudoun County, VA",VA,1.08,2026 Q2 trailing twelve months,TTM,38.9864,-77.5314,IM3 Google records in Loudoun County (mean of 5),https://www.datacenters.google/efficiency
+Google,"Loudoun County, VA (2nd facility)",VA,1.08,2026 Q2 trailing twelve months,TTM,38.9864,-77.5314,IM3 Google records in Loudoun County (mean of 5),https://www.datacenters.google/efficiency
+Google,"Mayes County, OK",OK,1.11,2026 Q2 trailing twelve months,TTM,,,none: no IM3 Google record in this county,https://www.datacenters.google/efficiency
+Google,"Midlothian, TX",TX,1.11,2026 Q2 trailing twelve months,TTM,32.4662,-96.995,IM3 Google records in Ellis County (mean of 4),https://www.datacenters.google/efficiency
+Google,"Montgomery County, TN",TN,1.09,2026 Q2 trailing twelve months,TTM,36.6253,-87.2602,IM3 Google records in Montgomery County (mean of 5),https://www.datacenters.google/efficiency
+Google,"Omaha, NE",NE,1.05,2026 Q2 trailing twelve months,TTM,41.3421,-96.0886,IM3 Google records in Douglas County (mean of 3),https://www.datacenters.google/efficiency
+Google,"Papillion, NE",NE,1.09,2026 Q2 trailing twelve months,TTM,41.1355,-96.1495,IM3 Google records in Sarpy County (mean of 4),https://www.datacenters.google/efficiency
+Google,"Storey County, NV",NV,1.15,2026 Q2 trailing twelve months,TTM,,,none: no IM3 Google record in this county,https://www.datacenters.google/efficiency
+Google,"The Dalles, OR",OR,1.1,2026 Q2 trailing twelve months,TTM,45.6353,-121.2019,IM3 Google records in Wasco County (mean of 2),https://www.datacenters.google/efficiency
+Google,"The Dalles, OR (2nd facility)",OR,1.06,2026 Q2 trailing twelve months,TTM,45.6353,-121.2019,IM3 Google records in Wasco County (mean of 2),https://www.datacenters.google/efficiency
+Google,"The Dalles, OR (3rd facility)",OR,1.08,2026 Q2 trailing twelve months,TTM,45.6353,-121.2019,IM3 Google records in Wasco County (mean of 2),https://www.datacenters.google/efficiency
+Microsoft,Central US (Iowa),IA,1.16,Jan-Dec 2022,operational,41.5196,-93.7747,IM3 Microsoft records in IA (mean of 22),https://datacenters.microsoft.com/globe/pdfs/sustainability/factsheets/Iowa%20%28Central%20US%29.pdf
+Microsoft,"East US (Boydton, Virginia)",VA,1.144,Jan-Dec 2022,operational,36.6854,-78.3766,"IM3 Microsoft records in Mecklenburg County (Boydton, named in fact sheet) (mean of 1)",https://datacenters.microsoft.com/globe/pdfs/sustainability/factsheets/Virginia%20(East%20US%20&%20East%20US%202).pdf
+Microsoft,West Central US (Wyoming),WY,1.125,Jan-Dec 2022,operational,41.1244,-104.9037,IM3 Microsoft records in WY (mean of 3),https://datacenters.microsoft.com/wp-content/uploads/2024/08/Wyoming%20(West%20Central%20US).pdf
+Microsoft,West US 2 (Washington),WA,1.156,Jan-Dec 2022,operational,47.2831,-119.9666,IM3 Microsoft records in WA (mean of 12),https://datacenters.microsoft.com/wp-content/uploads/2024/08/Washington%20%28West%20US%202%29.pdf
+Microsoft,West US 3 (Arizona),AZ,1.223,Jan-Dec 2022,operational,33.4211,-112.3679,IM3 Microsoft records in AZ (mean of 3),https://datacenters.microsoft.com/globe/pdfs/sustainability/factsheets/Arizona%20(West%20US%203).pdf
+Microsoft,"South Central US (San Antonio, Texas)",TX,1.307,Jan-Dec 2022,operational,29.4421,-98.7563,"IM3 Microsoft records in Bexar County (San Antonio, named in fact sheet) (mean of 7)",https://datacenters.microsoft.com/wp-content/uploads/2024/08/Texas%20%28South%20Central%20US%29.pdf
+AWS,US East (Northern Virginia),VA,1.15,2025 average,annual average,38.9204,-77.4888,IM3 Amazon records in Loudoun and Prince William (counties named in fact sheet) (mean of 120),https://sustainability.aboutamazon.com/aws-sustainability-fact-sheets/aws-fact-sheet-virginia.pdf
+AWS,US East (Ohio),OH,1.12,2025 average,annual average,40.0869,-83.0172,IM3 Amazon records in Central Ohio counties (fact sheet says Central Ohio) (mean of 41),https://sustainability.aboutamazon.com/aws-sustainability-fact-sheets/aws-fact-sheet-ohio.pdf
+AWS,US West (Oregon),OR,1.12,2025 average,annual average,45.8556,-119.4857,IM3 Amazon records in Morrow and Umatilla (counties named in fact sheet) (mean of 51),https://sustainability.aboutamazon.com/aws-sustainability-fact-sheets/aws-fact-sheet-oregon.pdf
+AWS,US West (Northern California),CA,1.18,2025 average,annual average,,,none: fact sheet names no location,https://sustainability.aboutamazon.com/aws-sustainability-fact-sheets/aws-fact-sheet-california.pdf

@@ -1,0 +1,107 @@
+{
+  "status": "programmatic checks passed",
+  "national_states": 56,
+  "states_with_sites": 47,
+  "huc8_count": 221,
+  "site_records": 1474,
+  "years": [
+    2023,
+    2030
+  ],
+  "scenarios": [
+    "higher_pressure",
+    "lower_pressure",
+    "central"
+  ],
+  "states_checked": [
+    "AZ",
+    "VA",
+    "CA",
+    "TX",
+    "NY",
+    "AK"
+  ],
+  "all_map_metrics_checked": [
+    "crpi_equal",
+    "annual_water_footprint_m3",
+    "annual_water_scarcity_footprint_m3_eq",
+    "median_aqueduct_water_stress",
+    "projected_energy_mwh",
+    "annual_co2_metric_tonnes",
+    "unique_population_within_5km",
+    "cluster_id",
+    "hotspot_category",
+    "scenario_robust"
+  ],
+  "cross_state_examples": [
+    [
+      "VA",
+      "02070005"
+    ],
+    [
+      "VA",
+      "02070006"
+    ],
+    [
+      "VA",
+      "02070008"
+    ],
+    [
+      "VA",
+      "02070010"
+    ],
+    [
+      "VA",
+      "02080206"
+    ],
+    [
+      "VA",
+      "03010106"
+    ],
+    [
+      "CA",
+      "18050002"
+    ],
+    [
+      "CA",
+      "18050004"
+    ],
+    [
+      "CA",
+      "18060006"
+    ],
+    [
+      "CA",
+      "18070104"
+    ],
+    [
+      "CA",
+      "18070204"
+    ],
+    [
+      "CA",
+      "18070303"
+    ],
+    [
+      "CA",
+      "18070304"
+    ],
+    [
+      "TX",
+      "12040104"
+    ],
+    [
+      "TX",
+      "13070001"
+    ]
+  ],
+  "full_polygon_equality_verified": true,
+  "huc8_click_verified": true,
+  "site_click_verified": true,
+  "year_scenario_updates_verified": true,
+  "population_static_verified": true,
+  "back_reset_verified": true,
+  "http_callback_tracebacks": 0,
+  "manual_browser_validation": "Not performed: Computer Use access to Chrome was not approved.",
+  "screenshots": "Manual capture instructions in outputs/dashboard/README.md; no synthetic screenshots."
+}

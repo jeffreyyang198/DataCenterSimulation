@@ -1,0 +1,3 @@
+site_id,source,source_version,source_site_id,site_name,state,state_abbr,state_fips,county,county_fips,longitude,latitude,square_feet,operator,operator_raw,site_type,reference,quality_flags,huc8,huc8_status,huc8_candidates,WF_1MW_DC,WSF_1MW_DC,CF_1MW_DC,table3_match
+im3_00365941471,im3,2026.02.09,00365941471,,Puerto Rico,PR,72,San Juan Municipio,72127,-66.0516872147712,18.446826968330527,23137.0,Claro,Claro,building,,,,no_polygon_match,,,,,False
+im3_10014176940,im3,2026.02.09,10014176940,Microsoft,Puerto Rico,PR,72,Guaynabo Municipio,72061,-66.10898950000002,18.41743590000001,,Microsoft,Microsoft,point,,missing_square_feet,,no_polygon_match,,,,,False

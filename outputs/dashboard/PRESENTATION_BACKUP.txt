@@ -1,0 +1,13 @@
+PRIMARY
+Run ./run_presentation_dashboard.sh from the repository root.
+
+Dashboard
+http://127.0.0.1:8050
+
+IF DASHBOARD FAILS
+Use the embedded MP4 from outputs/animations/data_center_resource_pressure_2023_2030.mp4.
+
+Poster frame
+outputs/animations/powerpoint_poster_frame.png
+
+The backup shows the earlier simulation. Use the live dashboard for current totals.

@@ -1,0 +1,33 @@
+{
+  "factor_year": 2023,
+  "mapping_status_counts": {
+    "geographic_screening": 1437,
+    "utility_verification_required": 37
+  },
+  "emissions_status_counts": {
+    "estimated_geographic_screening": 1213,
+    "missing_energy": 237,
+    "utility_verification_required": 24
+  },
+  "source_files": {
+    "subregions.zip": {
+      "url": "https://www.epa.gov/system/files/other-files/2025-01/egrid2023_subregions.zip",
+      "sha256": "0e8529937b6c849e490d93f1fb38b465e3ea902ff86d06bfbafe1b7fd67035ba"
+    },
+    "multiple.zip": {
+      "url": "https://www.epa.gov/system/files/other-files/2025-01/egrid2023_multiple_subregions.zip",
+      "sha256": "9c7398f84af782c1c1f51d0eed73a1bbe6b4ee8745b96247706f5eecce090168"
+    },
+    "egrid2023.xlsx": {
+      "url": "https://www.epa.gov/system/files/documents/2025-06/egrid2023_data_rev2.xlsx",
+      "sha256": "895cd81dd8662406189ad8adf5a2578dcb362cdb5cff7cca81b10ee6bd2447c6"
+    }
+  },
+  "limitations": [
+    "Geographic screening; electricity supplier not verified.",
+    "Shared subregion areas require utility verification; no emissions imputed.",
+    "2023 factors applied to hypothetical full-year 8760-hour energy scenarios.",
+    "Total-output generation factors; no grid-loss uplift or contractual renewable adjustment.",
+    "No aggregate site totals: overlapping source facilities remain unresolved."
+  ]
+}

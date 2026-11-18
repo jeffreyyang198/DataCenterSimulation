@@ -1,0 +1,4 @@
+Command: PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -u -m pytest -q
+
+...............................................................................                            [100%]
+79 passed, 38 subtests passed in 577.02s (0:09:37)

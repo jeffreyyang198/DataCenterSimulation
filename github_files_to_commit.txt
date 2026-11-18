@@ -1,0 +1,12 @@
+README.md
+data/processed/README.md
+docs/github_manifest.md
+docs/implementation_highlights.md
+github_files_to_commit.txt
+outputs/figures/README.md
+outputs/figures/qa/figure10a_huc8_feature_correlation.png
+outputs/figures/qa/figure10d_cluster_diagnostics.png
+outputs/figures/supplementary/figure11b_scenario_rank_robustness.png
+outputs/figures/supplementary/figure4_duplicate_sensitivity.png
+src/model/stateful_community.py
+src/pipeline/community_resource_pressure.py

@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "site_records": 1474,
+  "site_year_scenario_rows": 141504,
+  "central_site_year_rows": 11792,
+  "checks": [
+    "unique keys and years",
+    "strict cumulative state transitions",
+    "EPRI compounding equivalence",
+    "annual eGRID emissions",
+    "verified direct-water coefficient",
+    "annual Siddik WF/WSF",
+    "static population",
+    "external single-model climate and join uniqueness",
+    "bounded Aqueduct interpolation",
+    "no incompatible ratio",
+    "distinct HUC8/PFAF identifiers",
+    "missing values preserved",
+    "dissolved national population"
+  ]
+}

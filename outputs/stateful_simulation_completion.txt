@@ -1,0 +1,63 @@
+STATEFUL 2023–2030 SIMULATION COMPLETE
+
+Central scenario:
+EPRI moderate
+Aqueduct business_as_usual
+NASA SSP2-4.5
+Population ACS 2023
+
+Years:
+2023–2030
+
+Modeled sites:
+1,233 energy; 1,210 CO2; 1,225 WF/WSF; 1,474 retained
+
+Site-year rows:
+11,792 central; 141,504 full sensitivity grid
+
+Cumulative 2030 CO2:
+576,108,585.979 metric tonnes
+
+Cumulative 2030 direct water:
+3,280,982,473.520 m3
+
+2030 annual WF:
+2,319,248,000.278 m3/year
+
+2030 annual WSF:
+4,346,182,755.066 m3-eq/year
+
+Median 2030 Aqueduct water stress:
+0.272922314 raw ratio
+
+Median 2030 projected mean temperature:
+15.925 degrees C
+
+Unique population within 5 km:
+35,824,747.110 area-weighted residents (dissolved buffers)
+
+Files created:
+outputs/stateful_community_resource_simulation_2023_2030.csv
+outputs/stateful_community_resource_summary_2023_2030.csv
+outputs/stateful_huc8_resource_simulation_2023_2030.csv
+outputs/stateful_aqueduct_resource_simulation_2023_2030.csv
+outputs/simulation_animation_frames_2023_2030.csv
+outputs/figures/figure9a_stateful_energy_2023_2030.png
+outputs/figures/figure9a_stateful_energy_2023_2030.pdf
+outputs/figures/figure9b_cumulative_co2_2023_2030.png
+outputs/figures/figure9b_cumulative_co2_2023_2030.pdf
+outputs/figures/figure9c_direct_water_2023_2030.png
+outputs/figures/figure9c_direct_water_2023_2030.pdf
+outputs/figures/figure9d_resource_climate_trajectory.png
+outputs/figures/figure9d_resource_climate_trajectory.pdf
+outputs/stateful_simulation_provenance.json
+outputs/stateful_simulation_validation.json
+outputs/stateful_simulation_tests.txt
+docs/data_sources.md
+
+Tests:
+94 passed
+0 failed
+
+No adjusted water-stress ratio: supply/demand baseline unavailable; no unverified cm/year to m3/year conversion.
+No MP4/GIF created. No GitHub push. DataCenterSimulation/ unchanged.

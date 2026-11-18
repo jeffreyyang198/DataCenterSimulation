@@ -1,0 +1,10 @@
+{
+  "inputs": {
+    "data/processed/tracts_acs2023.gpkg": "1bc68b243698e8ef4f1600958586833840b0addb3c462fc2bab64b5e363a9a23",
+    "data/processed/master_sites.csv": "57617212817f4993c03b98fcd00d133310e0d66c985d74e3ed96d7ad2b734a53",
+    "data/processed/master_sites_with_huc8.csv": "e7a0f1159b37af4d580bdb3ef8f35afea75e8c5bffeff39d8176f5bd69b55895",
+    "data/processed/site_aqueduct_basins.csv": "d6582353edb71c9b70e5d5aa71a6537a3c77162122ca5d2c01ca7720b3e843d4"
+  },
+  "method": "Local AEQD 5-km circles; union within each group; EPSG:6933 full-tract area weighting",
+  "interpretation": "People near sites assigned to each group; buffers not clipped to watershed boundaries. Group populations overlap and are not additive."
+}

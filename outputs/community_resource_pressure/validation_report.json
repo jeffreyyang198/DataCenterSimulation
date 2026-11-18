@@ -1,0 +1,26 @@
+{
+  "site_records": 1474,
+  "combined_records": 17688,
+  "checks": "passed",
+  "expected_scenarios_per_site": 12,
+  "input_sha256": {
+    "data/raw/source_copy_manifest.json": "94a78208423a7592caa7b130dcde1e3faba5282cd10044aafdbd1cc6ea1eac2f",
+    "data/raw/census/acs2023/source_metadata.json": "0ba7f521725136b2c736ee3eaf7a1eb03b6cf717f39f30f26b2f3c3345419365",
+    "data/raw/epri/EPRI_2024_Projections.xlsx": "657926a0e7e3f0d38c918dc293cfffebeaa022a1409277ffbbe4d1f879477957",
+    "data/processed/master_sites.csv": "57617212817f4993c03b98fcd00d133310e0d66c985d74e3ed96d7ad2b734a53",
+    "data/processed/master_sites_with_huc8.csv": "e7a0f1159b37af4d580bdb3ef8f35afea75e8c5bffeff39d8176f5bd69b55895",
+    "data/processed/table3.csv": "53bae2910e599297ab9dcc052db77b6e0f91f468db63ec50e2c9b36822a1e925",
+    "data/processed/energy_scenarios/floor_area_1.0/low_ai_inference.csv": "c298fa5bf6dc10e6de0e291cf867f55a9dcebbbb56d4b3f3255205774001a64f",
+    "data/processed/community_exposure.csv": "8aa73802642a4930fb509a4d74d874c58a58ad4181a4bec7f30e48ee8186a537",
+    "src/pipeline/community_resource_pressure.py": "651b993852764e34de4410ebdf5f2744a93b00f49b76067d9a26d6040656d8f6",
+    "src/pipeline/complete_community_scenarios.py": "aef6428872d60a7a6fd47288d69bed2b27e0b450eb827bc8e6dcfa5f8f292ab3",
+    "src/impact/temporal_water.py": "365e5e4d6a582b153c55287f5b41978f2f02c3aa279f46abdd85fe91a9c9f801",
+    "src/model/epri_projection.py": "805081c9ef568830ed61681a4463bd6b83acc3bb60b1fb177e478205336263f5"
+  },
+  "test_suite": {
+    "status": "passed",
+    "tests": 79,
+    "subtests": 38,
+    "log": "test_results.txt"
+  }
+}

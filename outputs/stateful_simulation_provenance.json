@@ -1,0 +1,45 @@
+{
+  "created_utc": "2026-11-18T20:02:21.033422+00:00",
+  "climate_path": "data/raw/nasa/processed_data_2023_2030-1.csv",
+  "input_sha256": {
+    "data/processed/data_centers_with_energy_climate.csv": "84ba8182ca5adb5aacc4f6c29d597276c4c3e366b3a27f06b0c83d419464a6ad",
+    "data/raw/nasa/processed_data_2023_2030-1.csv": "9e4a82ec6039a647535fe3e614d1414eae63cd9b5f5e8ad34f65b570c1cba1c6",
+    "data/processed/master_sites_with_huc8.csv": "e7a0f1159b37af4d580bdb3ef8f35afea75e8c5bffeff39d8176f5bd69b55895",
+    "data/processed/community_exposure_acs2023.csv": "de323598201c2b2f85dcf1b815a4c5ec93d664ab0a4dc3eb9458648235256e59",
+    "data/processed/site_aqueduct_basins.csv": "d6582353edb71c9b70e5d5aa71a6537a3c77162122ca5d2c01ca7720b3e843d4",
+    "data/processed/emissions/egrid2023_factors.csv": "96022c6fc0a35839e2a581a29220e0d0de38058e3a88bf36b45350010ee90d00",
+    "data/processed/emissions/site_egrid_mapping.csv": "6640db7e4e2174ca806993d78dacb55e3f9279f0eb6ef6610b48d592698f4c33",
+    "data/raw/epri/EPRI_2024_Projections.xlsx": "657926a0e7e3f0d38c918dc293cfffebeaa022a1409277ffbbe4d1f879477957",
+    "data/raw/aqueduct/Aqueduct40_baseline_annual_y2023m07d05.csv": "fab1c0c29d98c74f0deff77eae66fda8bc78e0fde45ed13dbd6ecd4466434e23",
+    "data/raw/aqueduct/Aqueduct40_future_annual_y2023m07d05.csv": "22145cec96b2088e3d54f6a12d3b2bcc885a43e69f5b7170bbf42ee9bb0653ce",
+    "data/processed/tracts_acs2023.gpkg": "1bc68b243698e8ef4f1600958586833840b0addb3c462fc2bab64b5e363a9a23"
+  },
+  "implementation_sha256": {
+    "src/model/stateful_community.py": "e5c0af32c0fe7fd9fedc4c40a17314316be5317c46d79321dfc783fef3b0fdde",
+    "src/analysis/stateful_community_simulation.py": "01b137a36f48c33b55cbcf5b0136cfb974375b05e2c283a42c866ebebc56e097",
+    "src/analysis/plot_stateful_community.py": "cc90966bd1142b3b091cd830c8114dfac95e4f2f4160fc0e319e87b4d6cd43dd",
+    "docs/data_sources.md": "6b72b4540a4c831ebae4f0cbb6fe07073803f633d4f1659c7a43f13ef31512f0"
+  },
+  "direct_water_coefficient": {
+    "value": 1.8,
+    "unit": "m3/MWh",
+    "source": "Supplied Siddik supplementary notebook Estimating_WF_CF_WSF_of_data_centers.html",
+    "section": "Direct water footprint of data centers",
+    "verification_basis": "User-supplied source passage and implementation, recorded in docs/data_sources.md; original HTML not located locally."
+  },
+  "energy_basis": "Low density, AI inference, floor-area multiplier 1.0",
+  "energy_pue_mode": "climate_fitted",
+  "energy_pue_source_counts": {
+    "climate_fitted": 1237
+  },
+  "aqueduct_missing_baseline_fields": [
+    "available_blue_water",
+    "gross_water_demand"
+  ],
+  "adjusted_stress_ratio": "Not calculated: cm/year cannot be added to m3/year without a verified hydrologic normalization-area basis.",
+  "interpretation": "Screening of mapped site records, not a fully coupled climate-hydrology model or an independently deduplicated national inventory.",
+  "population": "ACS 2019\u20132023 static; group proximity populations overlap across groups",
+  "scenario_pairs": "Presentation combinations, not formally coupled climate/socioeconomic pathways",
+  "nasa_n_models": 1,
+  "animation_created": false
+}

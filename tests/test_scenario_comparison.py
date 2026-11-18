@@ -6,10 +6,34 @@ import pandas as pd
 from pandas.testing import assert_frame_equal
 
 from src.model.compare_energy_scenarios import compare_energy_scenarios
-from src.model.apply_im3_energy_model import ESTIMATE_COLUMNS
+from src.model.apply_im3_energy_model import ESTIMATE_COLUMNS, apply_energy_model
 
 
 class ScenarioComparisonTests(unittest.TestCase):
+    def test_climate_pue_changes_facility_energy_once_and_flags_fallback(self):
+        sites = pd.DataFrame({
+            'site_id': ['001', '002', '003'],
+            'site_type': ['building', 'building', 'building'],
+            'square_feet': [100000, 100000, 100000],
+        }, index=[3, 7, 9])
+        climate = pd.DataFrame({
+            'site_id': ['002', '001'],
+            'pue_k_fitted': [float('nan'), 1.5],
+        })
+        args = (sites, {'q25': 100, 'median': 200, 'q75': 300}, 1,
+                {'utilization': 0.4, 'idle_fraction': 0.2, 'pue': 1.4})
+        baseline = apply_energy_model(*args)
+        adjusted = apply_energy_model(*args, climate_pue=climate)
+        self.assertEqual(adjusted.index.tolist(), [3, 7, 9])
+        self.assertEqual(adjusted.pue.tolist(), [1.5, 1.4, 1.4])
+        self.assertEqual(adjusted.pue_source.tolist(),
+                         ['climate_fitted', 'scenario_fallback', 'scenario_fallback'])
+        self.assertEqual(adjusted.estimated_average_it_power_mw.tolist(),
+                         baseline.estimated_average_it_power_mw.tolist())
+        energy = 'estimated_annual_facility_energy_mwh'
+        self.assertAlmostEqual(adjusted.loc[3, energy], baseline.loc[3, energy] * 1.5 / 1.4)
+        self.assertEqual(adjusted.loc[[7, 9], energy].tolist(), baseline.loc[[7, 9], energy].tolist())
+
     def test_saved_scenarios_preserve_ids_exclusions_and_expected_energy(self):
         sites = pd.DataFrame({
             'site_id': ['001', '002', '003', '004'],

@@ -1,0 +1,20 @@
+{
+  "total_master_site_rows": 1474,
+  "rows_with_valid_coordinates": 1474,
+  "rows_assigned_huc8": 1472,
+  "rows_without_huc8": 2,
+  "unique_huc8_watersheds": 221,
+  "rows_matched_table3": 1472,
+  "rows_huc8_without_table3": 0,
+  "duplicate_table3_huc8_values": [],
+  "unmatched_table3_huc8_values": [],
+  "missing_parameters": {
+    "WF_1MW_DC": 11,
+    "WSF_1MW_DC": 11,
+    "CF_1MW_DC": 11
+  },
+  "huc8_status_counts": {
+    "assigned": 1472,
+    "no_polygon_match": 2
+  }
+}
